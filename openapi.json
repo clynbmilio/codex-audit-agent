@@ -1,0 +1,61 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "README Security Quick Audit",
+    "version": "0.1.0",
+    "description": "A tiny x402-paid endpoint that returns a concise README/security trust audit."
+  },
+  "servers": [
+    {
+      "url": "https://YOUR_PUBLIC_DOMAIN.example"
+    }
+  ],
+  "paths": {
+    "/audit": {
+      "post": {
+        "summary": "Run README/security trust audit",
+        "description": "Requires x402 payment unless demo mode is enabled.",
+        "operationId": "runReadmeSecurityQuickAudit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Structured audit result"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        },
+        "x402": {
+          "scheme": "exact",
+          "price": "$0.05",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuditRequest": {
+        "type": "object",
+        "required": ["readme"],
+        "properties": {
+          "project_name": { "type": "string" },
+          "url": { "type": "string" },
+          "readme": { "type": "string" },
+          "goal": { "type": "string" }
+        }
+      }
+    }
+  }
+}
