@@ -1,0 +1,18 @@
+[build]
+publish = "public"
+functions = "netlify/functions"
+
+[[redirects]]
+from = "/audit"
+to = "/.netlify/functions/audit"
+status = 200
+
+[[redirects]]
+from = "/health"
+to = "/.netlify/functions/health"
+status = 200
+
+[[redirects]]
+from = "/openapi.json"
+to = "/.well-known/openapi.json"
+status = 200
