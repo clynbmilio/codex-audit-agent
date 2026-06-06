@@ -26,3 +26,8 @@ status = 200
 from = "/.well-known/agent-card.json"
 to = "/.netlify/functions/agent-card"
 status = 200
+
+[[redirects]]
+from = "/.well-known/402index-verify.txt"
+to = "/.netlify/functions/402index-verify"
+status = 200
