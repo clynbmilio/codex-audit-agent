@@ -1,10 +1,12 @@
 const PRICE_USDC = process.env.PRICE_USDC || "0.05";
+const MAX_AMOUNT_REQUIRED = process.env.MAX_AMOUNT_REQUIRED || "50000";
 const PAY_TO = process.env.PAY_TO || "0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12";
 const USDC_ASSET = process.env.USDC_ASSET || "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+const FACILITATOR_URL = process.env.FACILITATOR_URL || "https://api.cdp.coinbase.com/platform/v2/x402";
 
 function paymentRequired(resourceUrl) {
   return {
-    x402Version: 1,
+    x402Version: 2,
     accepts: [
       {
         scheme: "exact",
@@ -12,9 +14,16 @@ function paymentRequired(resourceUrl) {
         asset: USDC_ASSET,
         payTo: PAY_TO,
         amount: PRICE_USDC,
+        maxAmountRequired: MAX_AMOUNT_REQUIRED,
         resource: resourceUrl,
         description: "README Security Quick Audit",
-        maxTimeoutSeconds: 120
+        mimeType: "application/json",
+        maxTimeoutSeconds: 120,
+        facilitator: FACILITATOR_URL,
+        extra: {
+          name: "USD Coin",
+          version: "2"
+        }
       }
     ]
   };
