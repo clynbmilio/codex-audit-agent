@@ -14,5 +14,15 @@ status = 200
 
 [[redirects]]
 from = "/openapi.json"
-to = "/.well-known/openapi.json"
+to = "/.netlify/functions/openapi"
+status = 200
+
+[[redirects]]
+from = "/.well-known/openapi.json"
+to = "/.netlify/functions/openapi"
+status = 200
+
+[[redirects]]
+from = "/.well-known/agent-card.json"
+to = "/.netlify/functions/agent-card"
 status = 200
