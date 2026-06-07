@@ -1,49 +1,14 @@
-const PRICE_USDC = process.env.PRICE_USDC || "0.05";
-const MAX_AMOUNT_REQUIRED = process.env.MAX_AMOUNT_REQUIRED || "50000";
-const PAY_TO = process.env.PAY_TO || "0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12";
-const USDC_ASSET = process.env.USDC_ASSET || "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
-const FACILITATOR_URL = process.env.FACILITATOR_URL || "https://api.cdp.coinbase.com/platform/v2/x402";
-
-function paymentRequired(resourceUrl) {
-  return {
-    x402Version: 2,
-    accepts: [
-      {
-        scheme: "exact",
-        network: "eip155:8453",
-        asset: USDC_ASSET,
-        payTo: PAY_TO,
-        amount: PRICE_USDC,
-        maxAmountRequired: MAX_AMOUNT_REQUIRED,
-        resource: resourceUrl,
-        description: "README Security Quick Audit",
-        mimeType: "application/json",
-        maxTimeoutSeconds: 120,
-        facilitator: FACILITATOR_URL,
-        extra: {
-          name: "USD Coin",
-          version: "2"
-        }
-      }
-    ]
-  };
-}
-
-function b64Json(value) {
-  return Buffer.from(JSON.stringify(value), "utf8").toString("base64");
-}
-
-function resourceUrlFromEvent(event) {
-  if (process.env.RESOURCE_URL) {
-    return process.env.RESOURCE_URL;
+  const verify = await callFacilitator("/verify", paymentPayload, paymentRequirements);
+  if (verify.isValid === false) {
+    return { ok: false, statusCode: 402, verify };
   }
 
-  const headers = Object.fromEntries(
-    Object.entries(event.headers || {}).map(([key, value]) => [key.toLowerCase(), value])
-  );
-  const host = headers["x-forwarded-host"] || headers.host || "YOUR_PUBLIC_DOMAIN.example";
-  const proto = headers["x-forwarded-proto"] || "https";
-  return `${proto}://${host}/audit`;
+  const settle = await callFacilitator("/settle", paymentPayload, paymentRequirements);
+  if (settle.success === false) {
+    return { ok: false, statusCode: 402, verify, settle };
+  }
+
+  return { ok: true, verify, settle };
 }
 
 function auditReadme(input) {
@@ -98,3 +63,96 @@ function auditReadme(input) {
   }
 
   const projectName = input.project_name || "this project";
+  return {
+    summary: `Audit complete for ${projectName}. Goal used: ${goal}`,
+    findings: findings.slice(0, 3),
+    rewrite: {
+      section: "README opening",
+      text: `${projectName} helps users ${goal.toLowerCase()} with a setup path that is explicit about prerequisites, verification, and trust boundaries. Start with the quickstart below, then review the configuration notes before using it with real credentials or production data.`
+    }
+  };
+}
+
+exports.handler = async function handler(event) {
+  const headers = Object.fromEntries(
+    Object.entries(event.headers || {}).map(([key, value]) => [key.toLowerCase(), value])
+  );
+  const demo = headers["x-demo-mode"] === "true";
+  const method = event.httpMethod || event.requestContext?.http?.method || "POST";
+  const required = paymentRequired(resourceUrlFromEvent(event));
+
+  let settlement = null;
+  if (!demo) {
+    try {
+      settlement = await settlePayment(headers, required.accepts[0]);
+    } catch (error) {
+      return {
+        statusCode: 402,
+        headers: {
+          "content-type": "application/json; charset=utf-8",
+          "PAYMENT-REQUIRED": b64Json(required)
+        },
+        body: JSON.stringify(
+          {
+            ...required,
+            facilitator_error: {
+              message: error.message,
+              statusCode: error.statusCode || null,
+              body: error.body || null
+            }
+          },
+          null,
+          2
+        )
+      };
+    }
+  }
+
+  if (!demo && !settlement) {
+    return {
+      statusCode: 402,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "PAYMENT-REQUIRED": b64Json(required)
+      },
+      body: JSON.stringify(required, null, 2)
+    };
+  }
+
+  if (!demo && settlement && !settlement.ok) {
+    return {
+      statusCode: settlement.statusCode || 402,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "PAYMENT-REQUIRED": b64Json(required)
+      },
+      body: JSON.stringify({ ...required, settlement }, null, 2)
+    };
+  }
+
+  if (method === "GET") {
+    return {
+      statusCode: 400,
+      headers: { "content-type": "application/json; charset=utf-8" },
+      body: JSON.stringify({ error: "Use POST with JSON body to run the audit." })
+    };
+  }
+
+  const input = event.body ? JSON.parse(event.body) : {};
+  if (!input.readme) {
+    return {
+      statusCode: 400,
+      headers: { "content-type": "application/json; charset=utf-8" },
+      body: JSON.stringify({ error: "Missing required field: readme" })
+    };
+  }
+
+  return {
+    statusCode: 200,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "PAYMENT-RESPONSE": demo ? "demo-mode-no-settlement" : b64Json(settlement.settle)
+    },
+    body: JSON.stringify(auditReadme(input), null, 2)
+  };
+};
