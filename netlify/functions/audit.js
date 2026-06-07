@@ -1,4 +1,4 @@
-  const verify = await callFacilitator("/verify", paymentPayload, paymentRequirements);
+    const verify = await callFacilitator("/verify", paymentPayload, paymentRequirements);
   if (verify.isValid === false) {
     return { ok: false, statusCode: 402, verify };
   }
