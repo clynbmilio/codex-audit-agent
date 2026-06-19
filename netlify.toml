@@ -8,6 +8,11 @@ to = "/.netlify/functions/audit"
 status = 200
 
 [[redirects]]
+from = "/service"
+to = "/.netlify/functions/service"
+status = 200
+
+[[redirects]]
 from = "/health"
 to = "/.netlify/functions/health"
 status = 200
