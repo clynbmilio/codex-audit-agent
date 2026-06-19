@@ -44,6 +44,32 @@ exports.handler = async function handler() {
                 payTo: PAY_TO
               }
             }
+          },
+          "/service": {
+            post: {
+              summary: "Run fixed-price README/security mini-audit",
+              description: "Requires x402 payment of 5 USDC unless demo mode is enabled.",
+              operationId: "runReadmeSecurityMiniAudit",
+              requestBody: {
+                required: true,
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/ServiceRequest" }
+                  }
+                }
+              },
+              responses: {
+                "200": { description: "Full mini-audit result" },
+                "402": { description: "Payment required" }
+              },
+              x402: {
+                scheme: "exact",
+                price: "$5.00",
+                network: "eip155:8453",
+                asset: USDC_ASSET,
+                payTo: PAY_TO
+              }
+            }
           }
         },
         components: {
@@ -56,6 +82,17 @@ exports.handler = async function handler() {
                 url: { type: "string" },
                 readme: { type: "string" },
                 goal: { type: "string" }
+              }
+            },
+            ServiceRequest: {
+              type: "object",
+              required: ["readme"],
+              properties: {
+                project_name: { type: "string" },
+                url: { type: "string" },
+                readme: { type: "string" },
+                task: { type: "string" },
+                constraints: { type: "string" }
               }
             }
           }
