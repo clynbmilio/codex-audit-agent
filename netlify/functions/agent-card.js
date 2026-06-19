@@ -51,6 +51,36 @@ exports.handler = async function handler() {
               currency: "USDC",
               network: "base"
             }
+          },
+          {
+            name: "service",
+            method: "POST",
+            path: "/service",
+            input_schema: {
+              type: "object",
+              required: ["readme"],
+              properties: {
+                project_name: { type: "string" },
+                url: { type: "string" },
+                readme: { type: "string" },
+                task: { type: "string" },
+                constraints: { type: "string" }
+              }
+            },
+            output_schema: {
+              type: "object",
+              properties: {
+                summary: { type: "string" },
+                findings: { type: "array" },
+                suggested_rewrite: { type: "object" },
+                delivery_checklist: { type: "array" }
+              }
+            },
+            price: {
+              amount: "5.00",
+              currency: "USDC",
+              network: "base"
+            }
           }
         ],
         payment: {
