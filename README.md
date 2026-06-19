@@ -14,6 +14,8 @@ Wallet:
 - `/openapi.json` OpenAPI metadata.
 - `/audit` paid endpoint shape that returns HTTP `402` with `PAYMENT-REQUIRED`.
 
+The agent-card and OpenAPI routes are served by Netlify Functions so they do not depend on GitHub uploading hidden `.well-known` folders correctly.
+
 ## Netlify Settings
 
 When importing this repository into Netlify:
@@ -35,3 +37,7 @@ Expected wallet:
 `0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12`
 
 Unpaid `/audit` should return HTTP `402`.
+
+## After Agent Card Works
+
+Run `NEXT.cmd` for live testing and discovery registration.
