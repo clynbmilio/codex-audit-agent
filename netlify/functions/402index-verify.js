@@ -1,4 +1,4 @@
-const VERIFICATION_HASH = process.env.C402INDEX_VERIFY_HASH || "f20798902826b01e4b89708bc6947288f1d3846960495a70b9d20d35537dced1";
+const VERIFICATION_HASH = process.env.C402INDEX_VERIFY_HASH || "REPLACE_WITH_402INDEX_VERIFICATION_HASH";
 
 exports.handler = async function handler() {
   return {
