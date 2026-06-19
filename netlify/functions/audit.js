@@ -1,4 +1,104 @@
-    const verify = await callFacilitator("/verify", paymentPayload, paymentRequirements);
+const PRICE_USDC = process.env.PRICE_USDC || "0.05";
+const AMOUNT_ATOMIC = process.env.AMOUNT_ATOMIC || "50000";
+const PAY_TO = process.env.PAY_TO || "0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12";
+const USDC_ASSET = process.env.USDC_ASSET || "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+const FACILITATOR_URL = process.env.FACILITATOR_URL || "https://facilitator.payai.network";
+
+function paymentRequired(resourceUrl) {
+  return {
+    x402Version: 2,
+    error: "PAYMENT-SIGNATURE header is required",
+    resource: {
+      url: resourceUrl,
+      description: "README Security Quick Audit",
+      mimeType: "application/json"
+    },
+    accepts: [
+      {
+        scheme: "exact",
+        network: "eip155:8453",
+        asset: USDC_ASSET,
+        payTo: PAY_TO,
+        amount: AMOUNT_ATOMIC,
+        maxAmountRequired: AMOUNT_ATOMIC,
+        resource: resourceUrl,
+        description: "README Security Quick Audit",
+        mimeType: "application/json",
+        maxTimeoutSeconds: 120,
+        facilitator: FACILITATOR_URL,
+        extra: {
+          name: "USD Coin",
+          version: "2"
+        }
+      }
+    ],
+    extensions: {}
+  };
+}
+
+function b64Json(value) {
+  return Buffer.from(JSON.stringify(value), "utf8").toString("base64");
+}
+
+function fromB64Json(value) {
+  return JSON.parse(Buffer.from(String(value), "base64").toString("utf8"));
+}
+
+function resourceUrlFromEvent(event) {
+  if (process.env.RESOURCE_URL) {
+    return process.env.RESOURCE_URL;
+  }
+
+  const headers = Object.fromEntries(
+    Object.entries(event.headers || {}).map(([key, value]) => [key.toLowerCase(), value])
+  );
+  const host = headers["x-forwarded-host"] || headers.host || "YOUR_PUBLIC_DOMAIN.example";
+  const proto = headers["x-forwarded-proto"] || "https";
+  return `${proto}://${host}/audit`;
+}
+
+async function callFacilitator(path, paymentPayload, paymentRequirements) {
+  const response = await fetch(`${FACILITATOR_URL}${path}`, {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify({
+      x402Version: 2,
+      paymentPayload,
+      paymentRequirements
+    })
+  });
+
+  const text = await response.text();
+  let body;
+  try {
+    body = text ? JSON.parse(text) : {};
+  } catch {
+    body = { raw: text };
+  }
+
+  if (!response.ok) {
+    const error = new Error(`facilitator ${path} failed with ${response.status}`);
+    error.statusCode = response.status;
+    error.body = body;
+    throw error;
+  }
+
+  return body;
+}
+
+async function settlePayment(headers, paymentRequirements) {
+  const header =
+    headers["payment-signature"] ||
+    headers["x-payment"] ||
+    headers["x-payment-payload"] ||
+    headers["payment"];
+
+  if (!header) {
+    return null;
+  }
+
+  const paymentPayload = fromB64Json(header);
+  const verify = await callFacilitator("/verify", paymentPayload, paymentRequirements);
   if (verify.isValid === false) {
     return { ok: false, statusCode: 402, verify };
   }
