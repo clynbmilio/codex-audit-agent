@@ -2,7 +2,7 @@ import { defineConfig, openapi } from "sourcey";
 
 export default defineConfig({
   name: "Immich API Reference",
-  siteUrl: "https://versy-docs.is-a.dev",
+  siteUrl: "https://versy-docs.rweb.site",
   repo: "https://github.com/immich-app/immich",
   theme: {
     preset: "api-first",

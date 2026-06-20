@@ -7,7 +7,7 @@ const outputDir = resolve(root, process.argv[2] ?? "dist");
 const specText = await readFile(resolve(root, "immich-openapi-specs.json"), "utf8");
 const spec = JSON.parse(specText);
 const searchIndex = JSON.parse(await readFile(resolve(outputDir, "search-index.json"), "utf8"));
-const baseUrl = "https://versy-docs.is-a.dev";
+const baseUrl = "https://versy-docs.rweb.site";
 const endpoints = searchIndex.filter((entry) => entry.category === "Endpoints");
 
 if (endpoints.length < 20) {
