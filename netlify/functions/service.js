@@ -1,6 +1,6 @@
 const PRICE_USDC = process.env.SERVICE_PRICE_USDC || "5.00";
 const AMOUNT_ATOMIC = process.env.SERVICE_AMOUNT_ATOMIC || "5000000";
-const PAY_TO = process.env.PAY_TO || "0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12";
+const PAY_TO = process.env.PAY_TO || "0x70b8294f9f3a1CA2751Fac7Bd5FC9b25678438bf";
 const USDC_ASSET = process.env.USDC_ASSET || "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const FACILITATOR_URL = process.env.FACILITATOR_URL || "https://facilitator.payai.network";
 

@@ -31,7 +31,7 @@ The existing README/security audit service remains available at `/audit`,
 `/service`, `/health`, `/openapi.json`, and
 `/.well-known/agent-card.json`. Its Base USDC payment address is:
 
-`0xEbf30aEe899729b64aA3436D6b1dd45D063D1A12`
+`0x70b8294f9f3a1CA2751Fac7Bd5FC9b25678438bf`
 
 ## Netlify Settings
 
