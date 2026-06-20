@@ -1,0 +1,1558 @@
+{
+  "schema_version": "1.0",
+  "library": {
+    "name": "Immich",
+    "version": "3.0.0-rc.2",
+    "source_repo": "https://github.com/immich-app/immich",
+    "source_commit": "b24a61714220a0c3999f4c24419b71472ee070c5",
+    "source_commit_url": "https://github.com/immich-app/immich/commit/b24a61714220a0c3999f4c24419b71472ee070c5",
+    "source_spec_path": "open-api/immich-openapi-specs.json",
+    "source_spec_url": "https://raw.githubusercontent.com/immich-app/immich/b24a61714220a0c3999f4c24419b71472ee070c5/open-api/immich-openapi-specs.json",
+    "source_spec_sha256": "fe159358809ebf247ba6ff1c4b9b27cfe8e58bd249236073f8a32ad4aaf1e7ba"
+  },
+  "generator": {
+    "name": "Sourcey",
+    "version": "3.6.3",
+    "adapter": "OpenAPI",
+    "command": "npx --yes sourcey@3.6.3 build --config sourcey.config.ts --output dist"
+  },
+  "site": {
+    "canonical_url": "https://versy-docs.is-a.dev",
+    "preview_url": "https://wewwwwww.netlify.app",
+    "api_reference_url": "https://versy-docs.is-a.dev/api.html",
+    "evidence_url": "https://versy-docs.is-a.dev/evidence.json",
+    "note": "Community-generated reference built from Immich's public OpenAPI specification; not an official Immich deployment."
+  },
+  "coverage": {
+    "documented_endpoints": 254,
+    "documented_schemas": 373,
+    "search_entries": 627,
+    "minimum_required_endpoints": 20
+  },
+  "pages": [
+    {
+      "title": "List all activities",
+      "method": "GET",
+      "path": "/activities",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-activities-get"
+    },
+    {
+      "title": "Create an activity",
+      "method": "POST",
+      "path": "/activities",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-activities-post"
+    },
+    {
+      "title": "Retrieve activity statistics",
+      "method": "GET",
+      "path": "/activities/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-activities-statistics-get"
+    },
+    {
+      "title": "Delete an activity",
+      "method": "DELETE",
+      "path": "/activities/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-activities-id-delete"
+    },
+    {
+      "title": "Unlink all OAuth accounts",
+      "method": "POST",
+      "path": "/admin/auth/unlink-all",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-auth-unlink-all-post"
+    },
+    {
+      "title": "List database backups",
+      "method": "GET",
+      "path": "/admin/database-backups",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-database-backups-get"
+    },
+    {
+      "title": "Delete database backup",
+      "method": "DELETE",
+      "path": "/admin/database-backups",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-database-backups-delete"
+    },
+    {
+      "title": "Start database backup restore flow",
+      "method": "POST",
+      "path": "/admin/database-backups/start-restore",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-database-backups-start-restore-post"
+    },
+    {
+      "title": "Upload database backup",
+      "method": "POST",
+      "path": "/admin/database-backups/upload",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-database-backups-upload-post"
+    },
+    {
+      "title": "Download database backup",
+      "method": "GET",
+      "path": "/admin/database-backups/{filename}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-database-backups-filename-get"
+    },
+    {
+      "title": "Get integrity report by type",
+      "method": "GET",
+      "path": "/admin/integrity/report",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-integrity-report-get"
+    },
+    {
+      "title": "Delete integrity report item",
+      "method": "DELETE",
+      "path": "/admin/integrity/report/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-integrity-report-id-delete"
+    },
+    {
+      "title": "Download flagged file",
+      "method": "GET",
+      "path": "/admin/integrity/report/{id}/file",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-integrity-report-id-file-get"
+    },
+    {
+      "title": "Export integrity report by type as CSV",
+      "method": "GET",
+      "path": "/admin/integrity/report/{type}/csv",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-integrity-report-type-csv-get"
+    },
+    {
+      "title": "Get integrity report summary",
+      "method": "GET",
+      "path": "/admin/integrity/summary",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-integrity-summary-get"
+    },
+    {
+      "title": "Set maintenance mode",
+      "method": "POST",
+      "path": "/admin/maintenance",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-maintenance-post"
+    },
+    {
+      "title": "Detect existing install",
+      "method": "GET",
+      "path": "/admin/maintenance/detect-install",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-maintenance-detect-install-get"
+    },
+    {
+      "title": "Log into maintenance mode",
+      "method": "POST",
+      "path": "/admin/maintenance/login",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-maintenance-login-post"
+    },
+    {
+      "title": "Get maintenance mode status",
+      "method": "GET",
+      "path": "/admin/maintenance/status",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-maintenance-status-get"
+    },
+    {
+      "title": "Create a notification",
+      "method": "POST",
+      "path": "/admin/notifications",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-notifications-post"
+    },
+    {
+      "title": "Render email template",
+      "method": "POST",
+      "path": "/admin/notifications/templates/{name}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-notifications-templates-name-post"
+    },
+    {
+      "title": "Send test email",
+      "method": "POST",
+      "path": "/admin/notifications/test-email",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-notifications-test-email-post"
+    },
+    {
+      "title": "Search users",
+      "method": "GET",
+      "path": "/admin/users",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-get"
+    },
+    {
+      "title": "Create a user",
+      "method": "POST",
+      "path": "/admin/users",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-post"
+    },
+    {
+      "title": "Retrieve a user",
+      "method": "GET",
+      "path": "/admin/users/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-get"
+    },
+    {
+      "title": "Update a user",
+      "method": "PUT",
+      "path": "/admin/users/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-put"
+    },
+    {
+      "title": "Delete a user",
+      "method": "DELETE",
+      "path": "/admin/users/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-delete"
+    },
+    {
+      "title": "Retrieve calendar heatmap activity",
+      "method": "GET",
+      "path": "/admin/users/{id}/calendar-heatmap",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-calendar-heatmap-get"
+    },
+    {
+      "title": "Retrieve user preferences",
+      "method": "GET",
+      "path": "/admin/users/{id}/preferences",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-preferences-get"
+    },
+    {
+      "title": "Update user preferences",
+      "method": "PUT",
+      "path": "/admin/users/{id}/preferences",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-preferences-put"
+    },
+    {
+      "title": "Restore a deleted user",
+      "method": "POST",
+      "path": "/admin/users/{id}/restore",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-restore-post"
+    },
+    {
+      "title": "Retrieve user sessions",
+      "method": "GET",
+      "path": "/admin/users/{id}/sessions",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-sessions-get"
+    },
+    {
+      "title": "Retrieve user statistics",
+      "method": "GET",
+      "path": "/admin/users/{id}/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-admin-users-id-statistics-get"
+    },
+    {
+      "title": "List all albums",
+      "method": "GET",
+      "path": "/albums",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-get"
+    },
+    {
+      "title": "Create an album",
+      "method": "POST",
+      "path": "/albums",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-post"
+    },
+    {
+      "title": "Add assets to albums",
+      "method": "PUT",
+      "path": "/albums/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-assets-put"
+    },
+    {
+      "title": "Retrieve album statistics",
+      "method": "GET",
+      "path": "/albums/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-statistics-get"
+    },
+    {
+      "title": "Retrieve an album",
+      "method": "GET",
+      "path": "/albums/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-get"
+    },
+    {
+      "title": "Delete an album",
+      "method": "DELETE",
+      "path": "/albums/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-delete"
+    },
+    {
+      "title": "Update an album",
+      "method": "PATCH",
+      "path": "/albums/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-patch"
+    },
+    {
+      "title": "Add assets to an album",
+      "method": "PUT",
+      "path": "/albums/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-assets-put"
+    },
+    {
+      "title": "Remove assets from an album",
+      "method": "DELETE",
+      "path": "/albums/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-assets-delete"
+    },
+    {
+      "title": "Retrieve album map markers",
+      "method": "GET",
+      "path": "/albums/{id}/map-markers",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-map-markers-get"
+    },
+    {
+      "title": "Update user role",
+      "method": "PUT",
+      "path": "/albums/{id}/user/{userId}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-user-userid-put"
+    },
+    {
+      "title": "Remove user from album",
+      "method": "DELETE",
+      "path": "/albums/{id}/user/{userId}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-user-userid-delete"
+    },
+    {
+      "title": "Share album with users",
+      "method": "PUT",
+      "path": "/albums/{id}/users",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-albums-id-users-put"
+    },
+    {
+      "title": "List all API keys",
+      "method": "GET",
+      "path": "/api-keys",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-api-keys-get"
+    },
+    {
+      "title": "Create an API key",
+      "method": "POST",
+      "path": "/api-keys",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-api-keys-post"
+    },
+    {
+      "title": "Retrieve the current API key",
+      "method": "GET",
+      "path": "/api-keys/me",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-api-keys-me-get"
+    },
+    {
+      "title": "Retrieve an API key",
+      "method": "GET",
+      "path": "/api-keys/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-api-keys-id-get"
+    },
+    {
+      "title": "Update an API key",
+      "method": "PUT",
+      "path": "/api-keys/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-api-keys-id-put"
+    },
+    {
+      "title": "Delete an API key",
+      "method": "DELETE",
+      "path": "/api-keys/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-api-keys-id-delete"
+    },
+    {
+      "title": "Upload asset",
+      "method": "POST",
+      "path": "/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-post"
+    },
+    {
+      "title": "Update assets",
+      "method": "PUT",
+      "path": "/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-put"
+    },
+    {
+      "title": "Delete assets",
+      "method": "DELETE",
+      "path": "/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-delete"
+    },
+    {
+      "title": "Check bulk upload",
+      "method": "POST",
+      "path": "/assets/bulk-upload-check",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-bulk-upload-check-post"
+    },
+    {
+      "title": "Copy asset",
+      "method": "PUT",
+      "path": "/assets/copy",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-copy-put"
+    },
+    {
+      "title": "Run an asset job",
+      "method": "POST",
+      "path": "/assets/jobs",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-jobs-post"
+    },
+    {
+      "title": "Upsert asset metadata",
+      "method": "PUT",
+      "path": "/assets/metadata",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-metadata-put"
+    },
+    {
+      "title": "Delete asset metadata",
+      "method": "DELETE",
+      "path": "/assets/metadata",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-metadata-delete"
+    },
+    {
+      "title": "Get asset statistics",
+      "method": "GET",
+      "path": "/assets/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-statistics-get"
+    },
+    {
+      "title": "Retrieve an asset",
+      "method": "GET",
+      "path": "/assets/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-get"
+    },
+    {
+      "title": "Update an asset",
+      "method": "PUT",
+      "path": "/assets/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-put"
+    },
+    {
+      "title": "Retrieve edits for an existing asset",
+      "method": "GET",
+      "path": "/assets/{id}/edits",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-edits-get"
+    },
+    {
+      "title": "Apply edits to an existing asset",
+      "method": "PUT",
+      "path": "/assets/{id}/edits",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-edits-put"
+    },
+    {
+      "title": "Remove edits from an existing asset",
+      "method": "DELETE",
+      "path": "/assets/{id}/edits",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-edits-delete"
+    },
+    {
+      "title": "Get asset metadata",
+      "method": "GET",
+      "path": "/assets/{id}/metadata",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-metadata-get"
+    },
+    {
+      "title": "Update asset metadata",
+      "method": "PUT",
+      "path": "/assets/{id}/metadata",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-metadata-put"
+    },
+    {
+      "title": "Retrieve asset metadata by key",
+      "method": "GET",
+      "path": "/assets/{id}/metadata/{key}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-metadata-key-get"
+    },
+    {
+      "title": "Delete asset metadata by key",
+      "method": "DELETE",
+      "path": "/assets/{id}/metadata/{key}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-metadata-key-delete"
+    },
+    {
+      "title": "Retrieve asset OCR data",
+      "method": "GET",
+      "path": "/assets/{id}/ocr",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-ocr-get"
+    },
+    {
+      "title": "Download original asset",
+      "method": "GET",
+      "path": "/assets/{id}/original",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-original-get"
+    },
+    {
+      "title": "View asset thumbnail",
+      "method": "GET",
+      "path": "/assets/{id}/thumbnail",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-thumbnail-get"
+    },
+    {
+      "title": "Play asset video",
+      "method": "GET",
+      "path": "/assets/{id}/video/playback",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-video-playback-get"
+    },
+    {
+      "title": "Get HLS main playlist",
+      "method": "GET",
+      "path": "/assets/{id}/video/stream/main.m3u8",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-video-stream-main-m3u8-get"
+    },
+    {
+      "title": "End HLS streaming session",
+      "method": "DELETE",
+      "path": "/assets/{id}/video/stream/{sessionId}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-video-stream-sessionid-delete"
+    },
+    {
+      "title": "Get HLS media playlist",
+      "method": "GET",
+      "path": "/assets/{id}/video/stream/{sessionId}/{variantIndex}/playlist.m3u8",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-video-stream-sessionid-variantindex-playlist-m3u8-get"
+    },
+    {
+      "title": "Get HLS segment or init file",
+      "method": "GET",
+      "path": "/assets/{id}/video/stream/{sessionId}/{variantIndex}/{filename}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-assets-id-video-stream-sessionid-variantindex-filename-get"
+    },
+    {
+      "title": "Register admin",
+      "method": "POST",
+      "path": "/auth/admin-sign-up",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-admin-sign-up-post"
+    },
+    {
+      "title": "Change password",
+      "method": "POST",
+      "path": "/auth/change-password",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-change-password-post"
+    },
+    {
+      "title": "Login",
+      "method": "POST",
+      "path": "/auth/login",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-login-post"
+    },
+    {
+      "title": "Logout",
+      "method": "POST",
+      "path": "/auth/logout",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-logout-post"
+    },
+    {
+      "title": "Setup pin code",
+      "method": "POST",
+      "path": "/auth/pin-code",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-pin-code-post"
+    },
+    {
+      "title": "Change pin code",
+      "method": "PUT",
+      "path": "/auth/pin-code",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-pin-code-put"
+    },
+    {
+      "title": "Reset pin code",
+      "method": "DELETE",
+      "path": "/auth/pin-code",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-pin-code-delete"
+    },
+    {
+      "title": "Lock auth session",
+      "method": "POST",
+      "path": "/auth/session/lock",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-session-lock-post"
+    },
+    {
+      "title": "Unlock auth session",
+      "method": "POST",
+      "path": "/auth/session/unlock",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-session-unlock-post"
+    },
+    {
+      "title": "Retrieve auth status",
+      "method": "GET",
+      "path": "/auth/status",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-status-get"
+    },
+    {
+      "title": "Validate access token",
+      "method": "POST",
+      "path": "/auth/validateToken",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-auth-validatetoken-post"
+    },
+    {
+      "title": "Download asset archive",
+      "method": "POST",
+      "path": "/download/archive",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-download-archive-post"
+    },
+    {
+      "title": "Retrieve download information",
+      "method": "POST",
+      "path": "/download/info",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-download-info-post"
+    },
+    {
+      "title": "Retrieve duplicates",
+      "method": "GET",
+      "path": "/duplicates",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-duplicates-get"
+    },
+    {
+      "title": "Delete duplicates",
+      "method": "DELETE",
+      "path": "/duplicates",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-duplicates-delete"
+    },
+    {
+      "title": "Resolve duplicate groups",
+      "method": "POST",
+      "path": "/duplicates/resolve",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-duplicates-resolve-post"
+    },
+    {
+      "title": "Dismiss a duplicate group",
+      "method": "DELETE",
+      "path": "/duplicates/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-duplicates-id-delete"
+    },
+    {
+      "title": "Retrieve faces for asset",
+      "method": "GET",
+      "path": "/faces",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-faces-get"
+    },
+    {
+      "title": "Create a face",
+      "method": "POST",
+      "path": "/faces",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-faces-post"
+    },
+    {
+      "title": "Re-assign a face to another person",
+      "method": "PUT",
+      "path": "/faces/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-faces-id-put"
+    },
+    {
+      "title": "Delete a face",
+      "method": "DELETE",
+      "path": "/faces/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-faces-id-delete"
+    },
+    {
+      "title": "Retrieve queue counts and status",
+      "method": "GET",
+      "path": "/jobs",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-jobs-get"
+    },
+    {
+      "title": "Create a manual job",
+      "method": "POST",
+      "path": "/jobs",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-jobs-post"
+    },
+    {
+      "title": "Run jobs",
+      "method": "PUT",
+      "path": "/jobs/{name}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-jobs-name-put"
+    },
+    {
+      "title": "Retrieve libraries",
+      "method": "GET",
+      "path": "/libraries",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-get"
+    },
+    {
+      "title": "Create a library",
+      "method": "POST",
+      "path": "/libraries",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-post"
+    },
+    {
+      "title": "Retrieve a library",
+      "method": "GET",
+      "path": "/libraries/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-id-get"
+    },
+    {
+      "title": "Update a library",
+      "method": "PUT",
+      "path": "/libraries/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-id-put"
+    },
+    {
+      "title": "Delete a library",
+      "method": "DELETE",
+      "path": "/libraries/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-id-delete"
+    },
+    {
+      "title": "Scan a library",
+      "method": "POST",
+      "path": "/libraries/{id}/scan",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-id-scan-post"
+    },
+    {
+      "title": "Retrieve library statistics",
+      "method": "GET",
+      "path": "/libraries/{id}/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-id-statistics-get"
+    },
+    {
+      "title": "Validate library settings",
+      "method": "POST",
+      "path": "/libraries/{id}/validate",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-libraries-id-validate-post"
+    },
+    {
+      "title": "Retrieve map markers",
+      "method": "GET",
+      "path": "/map/markers",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-map-markers-get"
+    },
+    {
+      "title": "Reverse geocode coordinates",
+      "method": "GET",
+      "path": "/map/reverse-geocode",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-map-reverse-geocode-get"
+    },
+    {
+      "title": "Retrieve memories",
+      "method": "GET",
+      "path": "/memories",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-get"
+    },
+    {
+      "title": "Create a memory",
+      "method": "POST",
+      "path": "/memories",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-post"
+    },
+    {
+      "title": "Retrieve memories statistics",
+      "method": "GET",
+      "path": "/memories/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-statistics-get"
+    },
+    {
+      "title": "Retrieve a memory",
+      "method": "GET",
+      "path": "/memories/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-id-get"
+    },
+    {
+      "title": "Update a memory",
+      "method": "PUT",
+      "path": "/memories/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-id-put"
+    },
+    {
+      "title": "Delete a memory",
+      "method": "DELETE",
+      "path": "/memories/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-id-delete"
+    },
+    {
+      "title": "Add assets to a memory",
+      "method": "PUT",
+      "path": "/memories/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-id-assets-put"
+    },
+    {
+      "title": "Remove assets from a memory",
+      "method": "DELETE",
+      "path": "/memories/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-memories-id-assets-delete"
+    },
+    {
+      "title": "Retrieve notifications",
+      "method": "GET",
+      "path": "/notifications",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-notifications-get"
+    },
+    {
+      "title": "Update notifications",
+      "method": "PUT",
+      "path": "/notifications",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-notifications-put"
+    },
+    {
+      "title": "Delete notifications",
+      "method": "DELETE",
+      "path": "/notifications",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-notifications-delete"
+    },
+    {
+      "title": "Get a notification",
+      "method": "GET",
+      "path": "/notifications/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-notifications-id-get"
+    },
+    {
+      "title": "Update a notification",
+      "method": "PUT",
+      "path": "/notifications/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-notifications-id-put"
+    },
+    {
+      "title": "Delete a notification",
+      "method": "DELETE",
+      "path": "/notifications/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-notifications-id-delete"
+    },
+    {
+      "title": "Start OAuth",
+      "method": "POST",
+      "path": "/oauth/authorize",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-oauth-authorize-post"
+    },
+    {
+      "title": "Backchannel OAuth logout",
+      "method": "POST",
+      "path": "/oauth/backchannel-logout",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-oauth-backchannel-logout-post"
+    },
+    {
+      "title": "Finish OAuth",
+      "method": "POST",
+      "path": "/oauth/callback",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-oauth-callback-post"
+    },
+    {
+      "title": "Link OAuth account",
+      "method": "POST",
+      "path": "/oauth/link",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-oauth-link-post"
+    },
+    {
+      "title": "Redirect OAuth to mobile",
+      "method": "GET",
+      "path": "/oauth/mobile-redirect",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-oauth-mobile-redirect-get"
+    },
+    {
+      "title": "Unlink OAuth account",
+      "method": "POST",
+      "path": "/oauth/unlink",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-oauth-unlink-post"
+    },
+    {
+      "title": "Retrieve partners",
+      "method": "GET",
+      "path": "/partners",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-partners-get"
+    },
+    {
+      "title": "Create a partner",
+      "method": "POST",
+      "path": "/partners",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-partners-post"
+    },
+    {
+      "title": "Create a partner",
+      "method": "POST",
+      "path": "/partners/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-partners-id-post"
+    },
+    {
+      "title": "Update a partner",
+      "method": "PUT",
+      "path": "/partners/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-partners-id-put"
+    },
+    {
+      "title": "Remove a partner",
+      "method": "DELETE",
+      "path": "/partners/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-partners-id-delete"
+    },
+    {
+      "title": "Get all people",
+      "method": "GET",
+      "path": "/people",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-get"
+    },
+    {
+      "title": "Create a person",
+      "method": "POST",
+      "path": "/people",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-post"
+    },
+    {
+      "title": "Update people",
+      "method": "PUT",
+      "path": "/people",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-put"
+    },
+    {
+      "title": "Delete people",
+      "method": "DELETE",
+      "path": "/people",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-delete"
+    },
+    {
+      "title": "Get a person",
+      "method": "GET",
+      "path": "/people/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-get"
+    },
+    {
+      "title": "Update person",
+      "method": "PUT",
+      "path": "/people/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-put"
+    },
+    {
+      "title": "Delete person",
+      "method": "DELETE",
+      "path": "/people/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-delete"
+    },
+    {
+      "title": "Merge people",
+      "method": "POST",
+      "path": "/people/{id}/merge",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-merge-post"
+    },
+    {
+      "title": "Reassign faces",
+      "method": "PUT",
+      "path": "/people/{id}/reassign",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-reassign-put"
+    },
+    {
+      "title": "Get person statistics",
+      "method": "GET",
+      "path": "/people/{id}/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-statistics-get"
+    },
+    {
+      "title": "Get person thumbnail",
+      "method": "GET",
+      "path": "/people/{id}/thumbnail",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-people-id-thumbnail-get"
+    },
+    {
+      "title": "List all plugins",
+      "method": "GET",
+      "path": "/plugins",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-plugins-get"
+    },
+    {
+      "title": "Retrieve plugin methods",
+      "method": "GET",
+      "path": "/plugins/methods",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-plugins-methods-get"
+    },
+    {
+      "title": "Retrieve workflow templates",
+      "method": "GET",
+      "path": "/plugins/templates",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-plugins-templates-get"
+    },
+    {
+      "title": "Retrieve a plugin",
+      "method": "GET",
+      "path": "/plugins/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-plugins-id-get"
+    },
+    {
+      "title": "List all queues",
+      "method": "GET",
+      "path": "/queues",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-queues-get"
+    },
+    {
+      "title": "Retrieve a queue",
+      "method": "GET",
+      "path": "/queues/{name}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-queues-name-get"
+    },
+    {
+      "title": "Update a queue",
+      "method": "PUT",
+      "path": "/queues/{name}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-queues-name-put"
+    },
+    {
+      "title": "Retrieve queue jobs",
+      "method": "GET",
+      "path": "/queues/{name}/jobs",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-queues-name-jobs-get"
+    },
+    {
+      "title": "Empty a queue",
+      "method": "DELETE",
+      "path": "/queues/{name}/jobs",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-queues-name-jobs-delete"
+    },
+    {
+      "title": "Retrieve assets by city",
+      "method": "GET",
+      "path": "/search/cities",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-cities-get"
+    },
+    {
+      "title": "Retrieve explore data",
+      "method": "GET",
+      "path": "/search/explore",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-explore-get"
+    },
+    {
+      "title": "Search large assets",
+      "method": "POST",
+      "path": "/search/large-assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-large-assets-post"
+    },
+    {
+      "title": "Search assets by metadata",
+      "method": "POST",
+      "path": "/search/metadata",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-metadata-post"
+    },
+    {
+      "title": "Search people",
+      "method": "GET",
+      "path": "/search/person",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-person-get"
+    },
+    {
+      "title": "Search places",
+      "method": "GET",
+      "path": "/search/places",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-places-get"
+    },
+    {
+      "title": "Search random assets",
+      "method": "POST",
+      "path": "/search/random",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-random-post"
+    },
+    {
+      "title": "Smart asset search",
+      "method": "POST",
+      "path": "/search/smart",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-smart-post"
+    },
+    {
+      "title": "Search asset statistics",
+      "method": "POST",
+      "path": "/search/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-statistics-post"
+    },
+    {
+      "title": "Retrieve search suggestions",
+      "method": "GET",
+      "path": "/search/suggestions",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-search-suggestions-get"
+    },
+    {
+      "title": "Get server information",
+      "method": "GET",
+      "path": "/server/about",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-about-get"
+    },
+    {
+      "title": "Get APK links",
+      "method": "GET",
+      "path": "/server/apk-links",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-apk-links-get"
+    },
+    {
+      "title": "Get config",
+      "method": "GET",
+      "path": "/server/config",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-config-get"
+    },
+    {
+      "title": "Get features",
+      "method": "GET",
+      "path": "/server/features",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-features-get"
+    },
+    {
+      "title": "Get product key",
+      "method": "GET",
+      "path": "/server/license",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-license-get"
+    },
+    {
+      "title": "Set server product key",
+      "method": "PUT",
+      "path": "/server/license",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-license-put"
+    },
+    {
+      "title": "Delete server product key",
+      "method": "DELETE",
+      "path": "/server/license",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-license-delete"
+    },
+    {
+      "title": "Get supported media types",
+      "method": "GET",
+      "path": "/server/media-types",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-media-types-get"
+    },
+    {
+      "title": "Ping",
+      "method": "GET",
+      "path": "/server/ping",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-ping-get"
+    },
+    {
+      "title": "Get statistics",
+      "method": "GET",
+      "path": "/server/statistics",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-statistics-get"
+    },
+    {
+      "title": "Get storage",
+      "method": "GET",
+      "path": "/server/storage",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-storage-get"
+    },
+    {
+      "title": "Get server version",
+      "method": "GET",
+      "path": "/server/version",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-version-get"
+    },
+    {
+      "title": "Get version check status",
+      "method": "GET",
+      "path": "/server/version-check",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-version-check-get"
+    },
+    {
+      "title": "Get version history",
+      "method": "GET",
+      "path": "/server/version-history",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-server-version-history-get"
+    },
+    {
+      "title": "Retrieve sessions",
+      "method": "GET",
+      "path": "/sessions",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sessions-get"
+    },
+    {
+      "title": "Create a session",
+      "method": "POST",
+      "path": "/sessions",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sessions-post"
+    },
+    {
+      "title": "Delete all sessions",
+      "method": "DELETE",
+      "path": "/sessions",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sessions-delete"
+    },
+    {
+      "title": "Update a session",
+      "method": "PUT",
+      "path": "/sessions/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sessions-id-put"
+    },
+    {
+      "title": "Delete a session",
+      "method": "DELETE",
+      "path": "/sessions/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sessions-id-delete"
+    },
+    {
+      "title": "Lock a session",
+      "method": "POST",
+      "path": "/sessions/{id}/lock",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sessions-id-lock-post"
+    },
+    {
+      "title": "Retrieve all shared links",
+      "method": "GET",
+      "path": "/shared-links",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-get"
+    },
+    {
+      "title": "Create a shared link",
+      "method": "POST",
+      "path": "/shared-links",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-post"
+    },
+    {
+      "title": "Shared link login",
+      "method": "POST",
+      "path": "/shared-links/login",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-login-post"
+    },
+    {
+      "title": "Retrieve current shared link",
+      "method": "GET",
+      "path": "/shared-links/me",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-me-get"
+    },
+    {
+      "title": "Retrieve a shared link",
+      "method": "GET",
+      "path": "/shared-links/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-id-get"
+    },
+    {
+      "title": "Delete a shared link",
+      "method": "DELETE",
+      "path": "/shared-links/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-id-delete"
+    },
+    {
+      "title": "Update a shared link",
+      "method": "PATCH",
+      "path": "/shared-links/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-id-patch"
+    },
+    {
+      "title": "Add assets to a shared link",
+      "method": "PUT",
+      "path": "/shared-links/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-id-assets-put"
+    },
+    {
+      "title": "Remove assets from a shared link",
+      "method": "DELETE",
+      "path": "/shared-links/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-shared-links-id-assets-delete"
+    },
+    {
+      "title": "Retrieve stacks",
+      "method": "GET",
+      "path": "/stacks",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-get"
+    },
+    {
+      "title": "Create a stack",
+      "method": "POST",
+      "path": "/stacks",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-post"
+    },
+    {
+      "title": "Delete stacks",
+      "method": "DELETE",
+      "path": "/stacks",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-delete"
+    },
+    {
+      "title": "Retrieve a stack",
+      "method": "GET",
+      "path": "/stacks/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-id-get"
+    },
+    {
+      "title": "Update a stack",
+      "method": "PUT",
+      "path": "/stacks/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-id-put"
+    },
+    {
+      "title": "Delete a stack",
+      "method": "DELETE",
+      "path": "/stacks/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-id-delete"
+    },
+    {
+      "title": "Remove an asset from a stack",
+      "method": "DELETE",
+      "path": "/stacks/{id}/assets/{assetId}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-stacks-id-assets-assetid-delete"
+    },
+    {
+      "title": "Retrieve acknowledgements",
+      "method": "GET",
+      "path": "/sync/ack",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sync-ack-get"
+    },
+    {
+      "title": "Acknowledge changes",
+      "method": "POST",
+      "path": "/sync/ack",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sync-ack-post"
+    },
+    {
+      "title": "Delete acknowledgements",
+      "method": "DELETE",
+      "path": "/sync/ack",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sync-ack-delete"
+    },
+    {
+      "title": "Stream sync changes",
+      "method": "POST",
+      "path": "/sync/stream",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-sync-stream-post"
+    },
+    {
+      "title": "Get system configuration",
+      "method": "GET",
+      "path": "/system-config",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-config-get"
+    },
+    {
+      "title": "Update system configuration",
+      "method": "PUT",
+      "path": "/system-config",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-config-put"
+    },
+    {
+      "title": "Get system configuration defaults",
+      "method": "GET",
+      "path": "/system-config/defaults",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-config-defaults-get"
+    },
+    {
+      "title": "Get storage template options",
+      "method": "GET",
+      "path": "/system-config/storage-template-options",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-config-storage-template-options-get"
+    },
+    {
+      "title": "Retrieve admin onboarding",
+      "method": "GET",
+      "path": "/system-metadata/admin-onboarding",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-metadata-admin-onboarding-get"
+    },
+    {
+      "title": "Update admin onboarding",
+      "method": "POST",
+      "path": "/system-metadata/admin-onboarding",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-metadata-admin-onboarding-post"
+    },
+    {
+      "title": "Retrieve reverse geocoding state",
+      "method": "GET",
+      "path": "/system-metadata/reverse-geocoding-state",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-metadata-reverse-geocoding-state-get"
+    },
+    {
+      "title": "Retrieve version check state",
+      "method": "GET",
+      "path": "/system-metadata/version-check-state",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-system-metadata-version-check-state-get"
+    },
+    {
+      "title": "Retrieve tags",
+      "method": "GET",
+      "path": "/tags",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-get"
+    },
+    {
+      "title": "Create a tag",
+      "method": "POST",
+      "path": "/tags",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-post"
+    },
+    {
+      "title": "Upsert tags",
+      "method": "PUT",
+      "path": "/tags",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-put"
+    },
+    {
+      "title": "Tag assets",
+      "method": "PUT",
+      "path": "/tags/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-assets-put"
+    },
+    {
+      "title": "Retrieve a tag",
+      "method": "GET",
+      "path": "/tags/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-id-get"
+    },
+    {
+      "title": "Update a tag",
+      "method": "PUT",
+      "path": "/tags/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-id-put"
+    },
+    {
+      "title": "Delete a tag",
+      "method": "DELETE",
+      "path": "/tags/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-id-delete"
+    },
+    {
+      "title": "Tag assets",
+      "method": "PUT",
+      "path": "/tags/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-id-assets-put"
+    },
+    {
+      "title": "Untag assets",
+      "method": "DELETE",
+      "path": "/tags/{id}/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-tags-id-assets-delete"
+    },
+    {
+      "title": "Get time bucket",
+      "method": "GET",
+      "path": "/timeline/bucket",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-timeline-bucket-get"
+    },
+    {
+      "title": "Get time buckets",
+      "method": "GET",
+      "path": "/timeline/buckets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-timeline-buckets-get"
+    },
+    {
+      "title": "Empty trash",
+      "method": "POST",
+      "path": "/trash/empty",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-trash-empty-post"
+    },
+    {
+      "title": "Restore trash",
+      "method": "POST",
+      "path": "/trash/restore",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-trash-restore-post"
+    },
+    {
+      "title": "Restore assets",
+      "method": "POST",
+      "path": "/trash/restore/assets",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-trash-restore-assets-post"
+    },
+    {
+      "title": "Get all users",
+      "method": "GET",
+      "path": "/users",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-get"
+    },
+    {
+      "title": "Get current user",
+      "method": "GET",
+      "path": "/users/me",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-get"
+    },
+    {
+      "title": "Update current user",
+      "method": "PUT",
+      "path": "/users/me",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-put"
+    },
+    {
+      "title": "Retrieve calendar heatmap activity",
+      "method": "GET",
+      "path": "/users/me/calendar-heatmap",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-calendar-heatmap-get"
+    },
+    {
+      "title": "Retrieve user product key",
+      "method": "GET",
+      "path": "/users/me/license",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-license-get"
+    },
+    {
+      "title": "Set user product key",
+      "method": "PUT",
+      "path": "/users/me/license",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-license-put"
+    },
+    {
+      "title": "Delete user product key",
+      "method": "DELETE",
+      "path": "/users/me/license",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-license-delete"
+    },
+    {
+      "title": "Retrieve user onboarding",
+      "method": "GET",
+      "path": "/users/me/onboarding",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-onboarding-get"
+    },
+    {
+      "title": "Update user onboarding",
+      "method": "PUT",
+      "path": "/users/me/onboarding",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-onboarding-put"
+    },
+    {
+      "title": "Delete user onboarding",
+      "method": "DELETE",
+      "path": "/users/me/onboarding",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-onboarding-delete"
+    },
+    {
+      "title": "Get my preferences",
+      "method": "GET",
+      "path": "/users/me/preferences",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-preferences-get"
+    },
+    {
+      "title": "Update my preferences",
+      "method": "PUT",
+      "path": "/users/me/preferences",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-me-preferences-put"
+    },
+    {
+      "title": "Create user profile image",
+      "method": "POST",
+      "path": "/users/profile-image",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-profile-image-post"
+    },
+    {
+      "title": "Delete user profile image",
+      "method": "DELETE",
+      "path": "/users/profile-image",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-profile-image-delete"
+    },
+    {
+      "title": "Retrieve a user",
+      "method": "GET",
+      "path": "/users/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-id-get"
+    },
+    {
+      "title": "Retrieve user profile image",
+      "method": "GET",
+      "path": "/users/{id}/profile-image",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-users-id-profile-image-get"
+    },
+    {
+      "title": "Retrieve assets by original path",
+      "method": "GET",
+      "path": "/view/folder",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-view-folder-get"
+    },
+    {
+      "title": "Retrieve unique paths",
+      "method": "GET",
+      "path": "/view/folder/unique-paths",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-view-folder-unique-paths-get"
+    },
+    {
+      "title": "List all workflows",
+      "method": "GET",
+      "path": "/workflows",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-get"
+    },
+    {
+      "title": "Create a workflow",
+      "method": "POST",
+      "path": "/workflows",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-post"
+    },
+    {
+      "title": "List all workflow triggers",
+      "method": "GET",
+      "path": "/workflows/triggers",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-triggers-get"
+    },
+    {
+      "title": "Retrieve a workflow",
+      "method": "GET",
+      "path": "/workflows/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-id-get"
+    },
+    {
+      "title": "Update a workflow",
+      "method": "PUT",
+      "path": "/workflows/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-id-put"
+    },
+    {
+      "title": "Delete a workflow",
+      "method": "DELETE",
+      "path": "/workflows/{id}",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-id-delete"
+    },
+    {
+      "title": "Retrieve a workflow",
+      "method": "GET",
+      "path": "/workflows/{id}/share",
+      "url": "https://versy-docs.is-a.dev/api.html#operation-workflows-id-share-get"
+    }
+  ]
+}

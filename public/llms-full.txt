@@ -1,0 +1,3458 @@
+# Immich API Reference
+
+Immich API
+
+## API Reference
+
+### Immich
+
+Path: `/api.html`
+Version: 3.0.0-rc.2
+
+Immich API
+
+#### Operations
+
+##### GET /activities
+
+Summary: List all activities
+
+Returns a list of activities for the selected asset or album. The activities are returned in sorted order, with the oldest activities appearing first.
+
+Parameters:
+- `albumId` (query, string, required) - Album ID
+- `assetId` (query, string, optional) - Asset ID (if activity is for an asset)
+- `level` (query, string, optional)
+- `type` (query, string, optional)
+- `userId` (query, string, optional) - Filter by user ID
+
+Responses:
+- 200
+
+##### POST /activities
+
+Summary: Create an activity
+
+Create a like or a comment for an album, or an asset in an album.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /activities/statistics
+
+Summary: Retrieve activity statistics
+
+Returns the number of likes and comments for a given album or asset in an album.
+
+Parameters:
+- `albumId` (query, string, required) - Album ID
+- `assetId` (query, string, optional) - Asset ID (if activity is for an asset)
+
+Responses:
+- 200
+
+##### DELETE /activities/{id}
+
+Summary: Delete an activity
+
+Removes a like or comment from a given album or asset in an album.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### POST /admin/auth/unlink-all
+
+Summary: Unlink all OAuth accounts
+
+Unlinks all OAuth accounts associated with user accounts in the system.
+
+Responses:
+- 204
+
+##### GET /admin/database-backups
+
+Summary: List database backups
+
+Get the list of the successful and failed backups
+
+Responses:
+- 200
+
+##### DELETE /admin/database-backups
+
+Summary: Delete database backup
+
+Delete a backup by its filename
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /admin/database-backups/start-restore
+
+Summary: Start database backup restore flow
+
+Put Immich into maintenance mode to restore a backup (Immich must not be configured)
+
+Responses:
+- 201
+
+##### POST /admin/database-backups/upload
+
+Summary: Upload database backup
+
+Uploads .sql/.sql.gz file to restore backup from
+
+Request body: multipart/form-data
+
+Responses:
+- 201
+
+##### GET /admin/database-backups/{filename}
+
+Summary: Download database backup
+
+Downloads the database backup file
+
+Parameters:
+- `filename` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /admin/integrity/report
+
+Summary: Get integrity report by type
+
+Get all flagged items by integrity report type
+
+Parameters:
+- `cursor` (query, string, optional) - Cursor for pagination
+- `limit` (query, integer, optional) - Number of items per page
+- `type` (query, string, required)
+
+Responses:
+- 200
+
+##### DELETE /admin/integrity/report/{id}
+
+Summary: Delete integrity report item
+
+Delete a given report item and perform corresponding deletion (e.g. trash asset, delete file)
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /admin/integrity/report/{id}/file
+
+Summary: Download flagged file
+
+Download the untracked/broken file if one exists
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /admin/integrity/report/{type}/csv
+
+Summary: Export integrity report by type as CSV
+
+Get all integrity report entries for a given type as a CSV
+
+Parameters:
+- `type` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /admin/integrity/summary
+
+Summary: Get integrity report summary
+
+Get a count of the items flagged in each integrity report
+
+Responses:
+- 200
+
+##### POST /admin/maintenance
+
+Summary: Set maintenance mode
+
+Put Immich into or take it out of maintenance mode
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /admin/maintenance/detect-install
+
+Summary: Detect existing install
+
+Collect integrity checks and other heuristics about local data.
+
+Responses:
+- 200
+
+##### POST /admin/maintenance/login
+
+Summary: Log into maintenance mode
+
+Login with maintenance token or cookie to receive current information and perform further actions.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /admin/maintenance/status
+
+Summary: Get maintenance mode status
+
+Fetch information about the currently running maintenance action.
+
+Responses:
+- 200
+
+##### POST /admin/notifications
+
+Summary: Create a notification
+
+Create a new notification for a specific user.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /admin/notifications/templates/{name}
+
+Summary: Render email template
+
+Retrieve a preview of the provided email template.
+
+Parameters:
+- `name` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /admin/notifications/test-email
+
+Summary: Send test email
+
+Send a test email using the provided SMTP configuration.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /admin/users
+
+Summary: Search users
+
+Search for users.
+
+Parameters:
+- `id` (query, string, optional) - User ID filter
+- `withDeleted` (query, boolean, optional) - Include deleted users
+
+Responses:
+- 200
+
+##### POST /admin/users
+
+Summary: Create a user
+
+Create a new user.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /admin/users/{id}
+
+Summary: Retrieve a user
+
+Retrieve  a specific user by their ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /admin/users/{id}
+
+Summary: Update a user
+
+Update an existing user.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /admin/users/{id}
+
+Summary: Delete a user
+
+Delete a user.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /admin/users/{id}/calendar-heatmap
+
+Summary: Retrieve calendar heatmap activity
+
+Retrieve activity counts for a specified period, in a calendar heatmap format.
+
+Parameters:
+- `from` (query, string, optional) - Start date in UTC
+- `id` (path, string, required)
+- `to` (query, string, optional) - End date in UTC
+- `type` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /admin/users/{id}/preferences
+
+Summary: Retrieve user preferences
+
+Retrieve the preferences of a specific user.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /admin/users/{id}/preferences
+
+Summary: Update user preferences
+
+Update the preferences of a specific user.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /admin/users/{id}/restore
+
+Summary: Restore a deleted user
+
+Restore a previously deleted user.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /admin/users/{id}/sessions
+
+Summary: Retrieve user sessions
+
+Retrieve all sessions for a specific user.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /admin/users/{id}/statistics
+
+Summary: Retrieve user statistics
+
+Retrieve asset statistics for a specific user.
+
+Parameters:
+- `id` (path, string, required)
+- `isFavorite` (query, boolean, optional) - Filter by favorite status
+- `isTrashed` (query, boolean, optional) - Filter by trash status
+- `visibility` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /albums
+
+Summary: List all albums
+
+Retrieve a list of albums available to the authenticated user.
+
+Parameters:
+- `assetId` (query, string, optional) - Filter albums containing this asset ID (ignores other parameters)
+- `id` (query, string, optional) - Album ID
+- `isOwned` (query, boolean, optional) - Filter by ownership: true = only owned, false = only shared-with-me, undefined = no filter
+- `isShared` (query, boolean, optional) - Filter by shared status: true = only shared, false = not shared, undefined = no filter
+- `name` (query, string, optional) - Album name (exact match)
+
+Responses:
+- 200
+
+##### POST /albums
+
+Summary: Create an album
+
+Create a new album. The album can also be created with initial users and assets.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### PUT /albums/assets
+
+Summary: Add assets to albums
+
+Send a list of asset IDs and album IDs to add each asset to each album.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /albums/statistics
+
+Summary: Retrieve album statistics
+
+Returns statistics about the albums available to the authenticated user.
+
+Responses:
+- 200
+
+##### GET /albums/{id}
+
+Summary: Retrieve an album
+
+Retrieve information about a specific album by its ID.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### DELETE /albums/{id}
+
+Summary: Delete an album
+
+Delete a specific album by its ID. Note the album is initially trashed and then immediately scheduled for deletion, but relies on a background job to complete the process.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### PATCH /albums/{id}
+
+Summary: Update an album
+
+Update the information of a specific album by its ID. This endpoint can be used to update the album name, description, sort order, etc. However, it is not used to add or remove assets or users from the album.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### PUT /albums/{id}/assets
+
+Summary: Add assets to an album
+
+Add multiple assets to a specific album by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /albums/{id}/assets
+
+Summary: Remove assets from an album
+
+Remove multiple assets from a specific album by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /albums/{id}/map-markers
+
+Summary: Retrieve album map markers
+
+Retrieve map marker information for a specific album by its ID.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### PUT /albums/{id}/user/{userId}
+
+Summary: Update user role
+
+Change the role for a specific user in a specific album.
+
+Parameters:
+- `id` (path, string, required)
+- `userId` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### DELETE /albums/{id}/user/{userId}
+
+Summary: Remove user from album
+
+Remove a user from an album. Use an ID of "me" to leave a shared album.
+
+Parameters:
+- `id` (path, string, required)
+- `userId` (path, string, required)
+
+Responses:
+- 204
+
+##### PUT /albums/{id}/users
+
+Summary: Share album with users
+
+Share an album with multiple users. Each user can be given a specific role in the album.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /api-keys
+
+Summary: List all API keys
+
+Retrieve all API keys of the current user.
+
+Responses:
+- 200
+
+##### POST /api-keys
+
+Summary: Create an API key
+
+Creates a new API key. It will be limited to the permissions specified.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /api-keys/me
+
+Summary: Retrieve the current API key
+
+Retrieve the API key that is used to access this endpoint.
+
+Responses:
+- 200
+
+##### GET /api-keys/{id}
+
+Summary: Retrieve an API key
+
+Retrieve an API key by its ID. The current user must own this API key.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /api-keys/{id}
+
+Summary: Update an API key
+
+Updates the name and permissions of an API key by its ID. The current user must own this API key.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /api-keys/{id}
+
+Summary: Delete an API key
+
+Deletes an API key identified by its ID. The current user must own this API key.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### POST /assets
+
+Summary: Upload asset
+
+Uploads a new asset to the server.
+
+Parameters:
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+- `x-immich-checksum` (header, string, optional) - sha1 checksum that can be used for duplicate detection before the file is uploaded
+
+Request body: multipart/form-data
+
+Responses:
+- 200: Asset is a duplicate
+- 201: Asset uploaded successfully
+
+##### PUT /assets
+
+Summary: Update assets
+
+Updates multiple assets at the same time.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### DELETE /assets
+
+Summary: Delete assets
+
+Deletes multiple assets at the same time.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### POST /assets/bulk-upload-check
+
+Summary: Check bulk upload
+
+Determine which assets have already been uploaded to the server based on their SHA1 checksums.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### PUT /assets/copy
+
+Summary: Copy asset
+
+Copy asset information like albums, tags, etc. from one asset to another.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### POST /assets/jobs
+
+Summary: Run an asset job
+
+Run a specific job on a set of assets.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### PUT /assets/metadata
+
+Summary: Upsert asset metadata
+
+Upsert metadata key-value pairs for multiple assets.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /assets/metadata
+
+Summary: Delete asset metadata
+
+Delete metadata key-value pairs for multiple assets.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /assets/statistics
+
+Summary: Get asset statistics
+
+Retrieve various statistics about the assets owned by the authenticated user.
+
+Parameters:
+- `isFavorite` (query, boolean, optional) - Filter by favorite status
+- `isTrashed` (query, boolean, optional) - Filter by trash status
+- `visibility` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /assets/{id}
+
+Summary: Retrieve an asset
+
+Retrieve detailed information about a specific asset.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### PUT /assets/{id}
+
+Summary: Update an asset
+
+Update information of a specific asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /assets/{id}/edits
+
+Summary: Retrieve edits for an existing asset
+
+Retrieve a series of edit actions (crop, rotate, mirror) associated with the specified asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /assets/{id}/edits
+
+Summary: Apply edits to an existing asset
+
+Apply a series of edit actions (crop, rotate, mirror) to the specified asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /assets/{id}/edits
+
+Summary: Remove edits from an existing asset
+
+Removes all edit actions (crop, rotate, mirror) associated with the specified asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /assets/{id}/metadata
+
+Summary: Get asset metadata
+
+Retrieve all metadata key-value pairs associated with the specified asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /assets/{id}/metadata
+
+Summary: Update asset metadata
+
+Update or add metadata key-value pairs for the specified asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /assets/{id}/metadata/{key}
+
+Summary: Retrieve asset metadata by key
+
+Retrieve the value of a specific metadata key associated with the specified asset.
+
+Parameters:
+- `id` (path, string, required) - Asset ID
+- `key` (path, string, required) - Metadata key
+
+Responses:
+- 200
+
+##### DELETE /assets/{id}/metadata/{key}
+
+Summary: Delete asset metadata by key
+
+Delete a specific metadata key-value pair associated with the specified asset.
+
+Parameters:
+- `id` (path, string, required) - Asset ID
+- `key` (path, string, required) - Metadata key
+
+Responses:
+- 204
+
+##### GET /assets/{id}/ocr
+
+Summary: Retrieve asset OCR data
+
+Retrieve all OCR (Optical Character Recognition) data associated with the specified asset.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /assets/{id}/original
+
+Summary: Download original asset
+
+Downloads the original file of the specified asset.
+
+Parameters:
+- `edited` (query, boolean, optional) - Return edited asset if available
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /assets/{id}/thumbnail
+
+Summary: View asset thumbnail
+
+Retrieve the thumbnail image for the specified asset. Viewing the fullsize thumbnail might redirect to downloadAsset, which requires a different permission.
+
+Parameters:
+- `edited` (query, boolean, optional) - Return edited asset if available
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `size` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /assets/{id}/video/playback
+
+Summary: Play asset video
+
+Streams the video file for the specified asset. This endpoint also supports byte range requests.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /assets/{id}/video/stream/main.m3u8
+
+Summary: Get HLS main playlist
+
+Returns an HLS main playlist with all available variants for the asset.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### DELETE /assets/{id}/video/stream/{sessionId}
+
+Summary: End HLS streaming session
+
+Releases server resources for the streaming session.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `sessionId` (path, string, required)
+- `slug` (query, string, optional)
+
+Responses:
+- 204
+
+##### GET /assets/{id}/video/stream/{sessionId}/{variantIndex}/playlist.m3u8
+
+Summary: Get HLS media playlist
+
+Returns an HLS media playlist for one variant of the streaming session.
+
+Parameters:
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `sessionId` (path, string, required)
+- `slug` (query, string, optional)
+- `variantIndex` (path, integer, required)
+- `x-immich-hls-pos` (header, number, optional)
+
+Responses:
+- 200
+
+##### GET /assets/{id}/video/stream/{sessionId}/{variantIndex}/{filename}
+
+Summary: Get HLS segment or init file
+
+Streams an HLS init segment (init.mp4) or media segment (seg_N.m4s).
+
+Parameters:
+- `filename` (path, string, required)
+- `id` (path, string, required)
+- `key` (query, string, optional)
+- `sessionId` (path, string, required)
+- `slug` (query, string, optional)
+- `variantIndex` (path, integer, required)
+- `x-immich-hls-msn` (header, integer, optional)
+
+Responses:
+- 200
+
+##### POST /auth/admin-sign-up
+
+Summary: Register admin
+
+Create the first admin user in the system.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /auth/change-password
+
+Summary: Change password
+
+Change the password of the current user.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /auth/login
+
+Summary: Login
+
+Login with username and password and receive a session token.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /auth/logout
+
+Summary: Logout
+
+Logout the current user and invalidate the session token.
+
+Responses:
+- 200
+
+##### POST /auth/pin-code
+
+Summary: Setup pin code
+
+Setup a new pin code for the current user.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### PUT /auth/pin-code
+
+Summary: Change pin code
+
+Change the pin code for the current user.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### DELETE /auth/pin-code
+
+Summary: Reset pin code
+
+Reset the pin code for the current user by providing the account password
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### POST /auth/session/lock
+
+Summary: Lock auth session
+
+Remove elevated access to locked assets from the current session.
+
+Responses:
+- 204
+
+##### POST /auth/session/unlock
+
+Summary: Unlock auth session
+
+Temporarily grant the session elevated access to locked assets by providing the correct PIN code.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /auth/status
+
+Summary: Retrieve auth status
+
+Get information about the current session, including whether the user has a password, and if the session can access locked assets.
+
+Responses:
+- 200
+
+##### POST /auth/validateToken
+
+Summary: Validate access token
+
+Validate the current authorization method is still valid.
+
+Responses:
+- 200
+
+##### POST /download/archive
+
+Summary: Download asset archive
+
+Download a ZIP archive containing the specified assets. The assets must have been previously requested via the "getDownloadInfo" endpoint.
+
+Parameters:
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /download/info
+
+Summary: Retrieve download information
+
+Retrieve information about how to request a download for the specified assets or album. The response includes groups of assets that can be downloaded together.
+
+Parameters:
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /duplicates
+
+Summary: Retrieve duplicates
+
+Retrieve a list of duplicate assets available to the authenticated user.
+
+Responses:
+- 200
+
+##### DELETE /duplicates
+
+Summary: Delete duplicates
+
+Delete multiple duplicate assets specified by their IDs.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### POST /duplicates/resolve
+
+Summary: Resolve duplicate groups
+
+Resolve duplicate groups by synchronizing metadata across assets and deleting/trashing duplicates.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /duplicates/{id}
+
+Summary: Dismiss a duplicate group
+
+Dismiss a duplicate group by its ID, unlinking all assets in the group without deleting them.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /faces
+
+Summary: Retrieve faces for asset
+
+Retrieve all faces belonging to an asset.
+
+Parameters:
+- `id` (query, string, required) - Face ID
+
+Responses:
+- 200
+
+##### POST /faces
+
+Summary: Create a face
+
+Create a new face that has not been discovered by facial recognition. The content of the bounding box is considered a face.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### PUT /faces/{id}
+
+Summary: Re-assign a face to another person
+
+Re-assign the face provided in the body to the person identified by the id in the path parameter.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /faces/{id}
+
+Summary: Delete a face
+
+Delete a face identified by the id. Optionally can be force deleted.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /jobs
+
+Summary: Retrieve queue counts and status
+
+Retrieve the counts of the current queue, as well as the current status.
+
+Responses:
+- 200
+
+##### POST /jobs
+
+Summary: Create a manual job
+
+Run a specific job. Most jobs are queued automatically, but this endpoint allows for manual creation of a handful of jobs, including various cleanup tasks, as well as creating a new database backup.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### PUT /jobs/{name}
+
+Summary: Run jobs
+
+Queue all assets for a specific job type. Defaults to only queueing assets that have not yet been processed, but the force command can be used to re-process all assets.
+
+Parameters:
+- `name` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /libraries
+
+Summary: Retrieve libraries
+
+Retrieve a list of external libraries.
+
+Responses:
+- 200
+
+##### POST /libraries
+
+Summary: Create a library
+
+Create a new external library.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /libraries/{id}
+
+Summary: Retrieve a library
+
+Retrieve an external library by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /libraries/{id}
+
+Summary: Update a library
+
+Update an existing external library.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /libraries/{id}
+
+Summary: Delete a library
+
+Delete an external library by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### POST /libraries/{id}/scan
+
+Summary: Scan a library
+
+Queue a scan for the external library to find and import new assets.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /libraries/{id}/statistics
+
+Summary: Retrieve library statistics
+
+Retrieve statistics for a specific external library, including number of videos, images, and storage usage.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### POST /libraries/{id}/validate
+
+Summary: Validate library settings
+
+Validate the settings of an external library.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /map/markers
+
+Summary: Retrieve map markers
+
+Retrieve a list of latitude and longitude coordinates for every asset with location data.
+
+Parameters:
+- `fileCreatedAfter` (query, string, optional) - Filter assets created after this date
+- `fileCreatedBefore` (query, string, optional) - Filter assets created before this date
+- `isArchived` (query, boolean, optional) - Filter by archived status
+- `isFavorite` (query, boolean, optional) - Filter by favorite status
+- `withPartners` (query, boolean, optional) - Include partner assets
+- `withSharedAlbums` (query, boolean, optional) - Include shared album assets
+
+Responses:
+- 200
+
+##### GET /map/reverse-geocode
+
+Summary: Reverse geocode coordinates
+
+Retrieve location information (e.g., city, country) for given latitude and longitude coordinates.
+
+Parameters:
+- `lat` (query, number, required) - Latitude (-90 to 90)
+- `lon` (query, number, required) - Longitude (-180 to 180)
+
+Responses:
+- 200
+
+##### GET /memories
+
+Summary: Retrieve memories
+
+Retrieve a list of memories. Memories are sorted descending by creation date by default, although they can also be sorted in ascending order, or randomly.
+
+Parameters:
+- `for` (query, string, optional) - Filter by date
+- `isSaved` (query, boolean, optional) - Filter by saved status
+- `isTrashed` (query, boolean, optional) - Include trashed memories
+- `order` (query, string, optional)
+- `size` (query, integer, optional) - Number of memories to return
+- `type` (query, string, optional)
+
+Responses:
+- 200
+
+##### POST /memories
+
+Summary: Create a memory
+
+Create a new memory by providing a name, description, and a list of asset IDs to include in the memory.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /memories/statistics
+
+Summary: Retrieve memories statistics
+
+Retrieve statistics about memories, such as total count and other relevant metrics.
+
+Parameters:
+- `for` (query, string, optional) - Filter by date
+- `isSaved` (query, boolean, optional) - Filter by saved status
+- `isTrashed` (query, boolean, optional) - Include trashed memories
+- `order` (query, string, optional)
+- `size` (query, integer, optional) - Number of memories to return
+- `type` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /memories/{id}
+
+Summary: Retrieve a memory
+
+Retrieve a specific memory by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /memories/{id}
+
+Summary: Update a memory
+
+Update an existing memory by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /memories/{id}
+
+Summary: Delete a memory
+
+Delete a specific memory by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### PUT /memories/{id}/assets
+
+Summary: Add assets to a memory
+
+Add a list of asset IDs to a specific memory.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /memories/{id}/assets
+
+Summary: Remove assets from a memory
+
+Remove a list of asset IDs from a specific memory.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /notifications
+
+Summary: Retrieve notifications
+
+Retrieve a list of notifications.
+
+Parameters:
+- `id` (query, string, optional) - Filter by notification ID
+- `level` (query, string, optional)
+- `type` (query, string, optional)
+- `unread` (query, boolean, optional) - Filter by unread status
+
+Responses:
+- 200
+
+##### PUT /notifications
+
+Summary: Update notifications
+
+Update a list of notifications. Allows to bulk-set the read status of notifications.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### DELETE /notifications
+
+Summary: Delete notifications
+
+Delete a list of notifications at once.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /notifications/{id}
+
+Summary: Get a notification
+
+Retrieve a specific notification identified by id.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /notifications/{id}
+
+Summary: Update a notification
+
+Update a specific notification to set its read status.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /notifications/{id}
+
+Summary: Delete a notification
+
+Delete a specific notification.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### POST /oauth/authorize
+
+Summary: Start OAuth
+
+Initiate the OAuth authorization process.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /oauth/backchannel-logout
+
+Summary: Backchannel OAuth logout
+
+Logout the OAuth account and invalidate the session specified by the sid claim or all sessions if the sid claim is not present.
+
+Request body: application/x-www-form-urlencoded
+
+Responses:
+- 200
+
+##### POST /oauth/callback
+
+Summary: Finish OAuth
+
+Complete the OAuth authorization process by exchanging the authorization code for a session token.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /oauth/link
+
+Summary: Link OAuth account
+
+Link an OAuth account to the authenticated user.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /oauth/mobile-redirect
+
+Summary: Redirect OAuth to mobile
+
+Requests to this URL are automatically forwarded to the mobile app, and is used in some cases for OAuth redirecting.
+
+Responses:
+- 200
+
+##### POST /oauth/unlink
+
+Summary: Unlink OAuth account
+
+Unlink the OAuth account from the authenticated user.
+
+Responses:
+- 200
+
+##### GET /partners
+
+Summary: Retrieve partners
+
+Retrieve a list of partners with whom assets are shared.
+
+Parameters:
+- `direction` (query, string, required)
+
+Responses:
+- 200
+
+##### POST /partners
+
+Summary: Create a partner
+
+Create a new partner to share assets with.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /partners/{id}
+
+Summary: Create a partner
+
+Create a new partner to share assets with.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 201
+
+##### PUT /partners/{id}
+
+Summary: Update a partner
+
+Specify whether a partner's assets should appear in the user's timeline.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /partners/{id}
+
+Summary: Remove a partner
+
+Stop sharing assets with a partner.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /people
+
+Summary: Get all people
+
+Retrieve a list of all people.
+
+Parameters:
+- `closestAssetId` (query, string, optional) - Closest asset ID for similarity search
+- `closestPersonId` (query, string, optional) - Closest person ID for similarity search
+- `page` (query, integer, optional) - Page number for pagination
+- `size` (query, integer, optional) - Number of items per page
+- `withHidden` (query, boolean, optional) - Include hidden people
+
+Responses:
+- 200
+
+##### POST /people
+
+Summary: Create a person
+
+Create a new person that can have multiple faces assigned to them.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### PUT /people
+
+Summary: Update people
+
+Bulk update multiple people at once.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /people
+
+Summary: Delete people
+
+Bulk delete a list of people at once.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /people/{id}
+
+Summary: Get a person
+
+Retrieve a person by id.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /people/{id}
+
+Summary: Update person
+
+Update an individual person.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /people/{id}
+
+Summary: Delete person
+
+Delete an individual person.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### POST /people/{id}/merge
+
+Summary: Merge people
+
+Merge a list of people into the person specified in the path parameter.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### PUT /people/{id}/reassign
+
+Summary: Reassign faces
+
+Bulk reassign a list of faces to a different person.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /people/{id}/statistics
+
+Summary: Get person statistics
+
+Retrieve statistics about a specific person.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /people/{id}/thumbnail
+
+Summary: Get person thumbnail
+
+Retrieve the thumbnail file for a person.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /plugins
+
+Summary: List all plugins
+
+Retrieve a list of plugins available to the authenticated user.
+
+Parameters:
+- `description` (query, string, optional)
+- `enabled` (query, boolean, optional) - Whether the plugin is enabled
+- `id` (query, string, optional) - Plugin ID
+- `name` (query, string, optional)
+- `title` (query, string, optional)
+- `version` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /plugins/methods
+
+Summary: Retrieve plugin methods
+
+Retrieve a list of plugin methods
+
+Parameters:
+- `description` (query, string, optional)
+- `enabled` (query, boolean, optional) - Whether the plugin method is enabled
+- `id` (query, string, optional) - Plugin method ID
+- `name` (query, string, optional)
+- `pluginName` (query, string, optional) - Plugin name
+- `pluginVersion` (query, string, optional) - Plugin version
+- `title` (query, string, optional)
+- `trigger` (query, string, optional) - Workflow trigger
+- `type` (query, string, optional) - Workflow types
+
+Responses:
+- 200
+
+##### GET /plugins/templates
+
+Summary: Retrieve workflow templates
+
+Retrieve workflow templates provided by installed plugins
+
+Responses:
+- 200
+
+##### GET /plugins/{id}
+
+Summary: Retrieve a plugin
+
+Retrieve information about a specific plugin by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /queues
+
+Summary: List all queues
+
+Retrieves a list of queues.
+
+Responses:
+- 200
+
+##### GET /queues/{name}
+
+Summary: Retrieve a queue
+
+Retrieves a specific queue by its name.
+
+Parameters:
+- `name` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /queues/{name}
+
+Summary: Update a queue
+
+Change the paused status of a specific queue.
+
+Parameters:
+- `name` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /queues/{name}/jobs
+
+Summary: Retrieve queue jobs
+
+Retrieves a list of queue jobs from the specified queue.
+
+Parameters:
+- `name` (path, string, required)
+- `status` (query, array, optional) - Filter jobs by status
+
+Responses:
+- 200
+
+##### DELETE /queues/{name}/jobs
+
+Summary: Empty a queue
+
+Removes all jobs from the specified queue.
+
+Parameters:
+- `name` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /search/cities
+
+Summary: Retrieve assets by city
+
+Retrieve a list of assets with each asset belonging to a different city. This endpoint is used on the places pages to show a single thumbnail for each city the user has assets in.
+
+Responses:
+- 200
+
+##### GET /search/explore
+
+Summary: Retrieve explore data
+
+Retrieve data for the explore section, such as popular people and places.
+
+Responses:
+- 200
+
+##### POST /search/large-assets
+
+Summary: Search large assets
+
+Search for assets that are considered large based on specified criteria.
+
+Parameters:
+- `albumIds` (query, array, optional) - Filter by album IDs
+- `city` (query, string, optional) - Filter by city name
+- `country` (query, string, optional) - Filter by country name
+- `createdAfter` (query, string, optional) - Filter by creation date (after)
+- `createdBefore` (query, string, optional) - Filter by creation date (before)
+- `isEncoded` (query, boolean, optional) - Filter by encoded status
+- `isFavorite` (query, boolean, optional) - Filter by favorite status
+- `isMotion` (query, boolean, optional) - Filter by motion photo status
+- `isNotInAlbum` (query, boolean, optional) - Filter assets not in any album
+- `isOffline` (query, boolean, optional) - Filter by offline status
+- `lensModel` (query, string, optional) - Filter by lens model
+- `libraryId` (query, string, optional) - Library ID to filter by
+- `make` (query, string, optional) - Filter by camera make
+- `minFileSize` (query, integer, optional) - Minimum file size in bytes
+- `model` (query, string, optional) - Filter by camera model
+- `ocr` (query, string, optional) - Filter by OCR text content
+- `personIds` (query, array, optional) - Filter by person IDs
+- `rating` (query, integer, optional) - Filter by rating [1-5], or null for unrated
+- `size` (query, integer, optional) - Number of results to return
+- `state` (query, string, optional) - Filter by state/province name
+- `tagIds` (query, array, optional) - Filter by tag IDs
+- `takenAfter` (query, string, optional) - Filter by taken date (after)
+- `takenBefore` (query, string, optional) - Filter by taken date (before)
+- `trashedAfter` (query, string, optional) - Filter by trash date (after)
+- `trashedBefore` (query, string, optional) - Filter by trash date (before)
+- `type` (query, string, optional)
+- `updatedAfter` (query, string, optional) - Filter by update date (after)
+- `updatedBefore` (query, string, optional) - Filter by update date (before)
+- `visibility` (query, string, optional)
+- `withDeleted` (query, boolean, optional) - Include deleted assets
+- `withExif` (query, boolean, optional) - Include EXIF data in response
+
+Responses:
+- 200
+
+##### POST /search/metadata
+
+Summary: Search assets by metadata
+
+Search for assets based on various metadata criteria.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /search/person
+
+Summary: Search people
+
+Search for people by name.
+
+Parameters:
+- `name` (query, string, required) - Person name to search for
+- `withHidden` (query, boolean, optional) - Include hidden people
+
+Responses:
+- 200
+
+##### GET /search/places
+
+Summary: Search places
+
+Search for places by name.
+
+Parameters:
+- `name` (query, string, required) - Place name to search for
+
+Responses:
+- 200
+
+##### POST /search/random
+
+Summary: Search random assets
+
+Retrieve a random selection of assets based on the provided criteria.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /search/smart
+
+Summary: Smart asset search
+
+Perform a smart search for assets by using machine learning vectors to determine relevance.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /search/statistics
+
+Summary: Search asset statistics
+
+Retrieve statistical data about assets based on search criteria, such as the total matching count.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /search/suggestions
+
+Summary: Retrieve search suggestions
+
+Retrieve search suggestions based on partial input. This endpoint is used for typeahead search features.
+
+Parameters:
+- `country` (query, string, optional) - Filter by country
+- `includeNull` (query, boolean, optional) - Include null values in suggestions
+- `lensModel` (query, string, optional) - Filter by lens model
+- `make` (query, string, optional) - Filter by camera make
+- `model` (query, string, optional) - Filter by camera model
+- `state` (query, string, optional) - Filter by state/province
+- `type` (query, string, required)
+
+Responses:
+- 200
+
+##### GET /server/about
+
+Summary: Get server information
+
+Retrieve a list of information about the server.
+
+Responses:
+- 200
+
+##### GET /server/apk-links
+
+Summary: Get APK links
+
+Retrieve links to the APKs for the current server version.
+
+Responses:
+- 200
+
+##### GET /server/config
+
+Summary: Get config
+
+Retrieve the current server configuration.
+
+Responses:
+- 200
+
+##### GET /server/features
+
+Summary: Get features
+
+Retrieve available features supported by this server.
+
+Responses:
+- 200
+
+##### GET /server/license
+
+Summary: Get product key
+
+Retrieve information about whether the server currently has a product key registered.
+
+Responses:
+- 200
+- 404
+
+##### PUT /server/license
+
+Summary: Set server product key
+
+Validate and set the server product key if successful.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /server/license
+
+Summary: Delete server product key
+
+Delete the currently set server product key.
+
+Responses:
+- 204
+
+##### GET /server/media-types
+
+Summary: Get supported media types
+
+Retrieve all media types supported by the server.
+
+Responses:
+- 200
+
+##### GET /server/ping
+
+Summary: Ping
+
+Pong
+
+Responses:
+- 200
+
+##### GET /server/statistics
+
+Summary: Get statistics
+
+Retrieve statistics about the entire Immich instance such as asset counts.
+
+Responses:
+- 200
+
+##### GET /server/storage
+
+Summary: Get storage
+
+Retrieve the current storage utilization information of the server.
+
+Responses:
+- 200
+
+##### GET /server/version
+
+Summary: Get server version
+
+Retrieve the current server version in semantic versioning (semver) format.
+
+Responses:
+- 200
+
+##### GET /server/version-check
+
+Summary: Get version check status
+
+Retrieve information about the last time the version check ran.
+
+Responses:
+- 200
+
+##### GET /server/version-history
+
+Summary: Get version history
+
+Retrieve a list of past versions the server has been on.
+
+Responses:
+- 200
+
+##### GET /sessions
+
+Summary: Retrieve sessions
+
+Retrieve a list of sessions for the user.
+
+Responses:
+- 200
+
+##### POST /sessions
+
+Summary: Create a session
+
+Create a session as a child to the current session. This endpoint is used for casting.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### DELETE /sessions
+
+Summary: Delete all sessions
+
+Delete all sessions for the user. This will not delete the current session.
+
+Responses:
+- 204
+
+##### PUT /sessions/{id}
+
+Summary: Update a session
+
+Update a specific session identified by id.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /sessions/{id}
+
+Summary: Delete a session
+
+Delete a specific session by id.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### POST /sessions/{id}/lock
+
+Summary: Lock a session
+
+Lock a specific session by id.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /shared-links
+
+Summary: Retrieve all shared links
+
+Retrieve a list of all shared links.
+
+Parameters:
+- `albumId` (query, string, optional) - Filter by album ID
+- `id` (query, string, optional) - Filter by shared link ID
+
+Responses:
+- 200
+
+##### POST /shared-links
+
+Summary: Create a shared link
+
+Create a new shared link.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### POST /shared-links/login
+
+Summary: Shared link login
+
+Login to a password protected shared link
+
+Parameters:
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /shared-links/me
+
+Summary: Retrieve current shared link
+
+Retrieve the current shared link associated with authentication method.
+
+Parameters:
+- `key` (query, string, optional)
+- `slug` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /shared-links/{id}
+
+Summary: Retrieve a shared link
+
+Retrieve a specific shared link by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### DELETE /shared-links/{id}
+
+Summary: Delete a shared link
+
+Delete a specific shared link by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### PATCH /shared-links/{id}
+
+Summary: Update a shared link
+
+Update an existing shared link by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### PUT /shared-links/{id}/assets
+
+Summary: Add assets to a shared link
+
+Add assets to a specific shared link by its ID. This endpoint is only relevant for shared link of type individual.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /shared-links/{id}/assets
+
+Summary: Remove assets from a shared link
+
+Remove assets from a specific shared link by its ID. This endpoint is only relevant for shared link of type individual.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /stacks
+
+Summary: Retrieve stacks
+
+Retrieve a list of stacks.
+
+Parameters:
+- `primaryAssetId` (query, string, optional) - Filter by primary asset ID
+
+Responses:
+- 200
+
+##### POST /stacks
+
+Summary: Create a stack
+
+Create a new stack by providing a name and a list of asset IDs to include in the stack. If any of the provided asset IDs are primary assets of an existing stack, the existing stack will be merged into the newly created stack.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### DELETE /stacks
+
+Summary: Delete stacks
+
+Delete multiple stacks by providing a list of stack IDs.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /stacks/{id}
+
+Summary: Retrieve a stack
+
+Retrieve a specific stack by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /stacks/{id}
+
+Summary: Update a stack
+
+Update an existing stack by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /stacks/{id}
+
+Summary: Delete a stack
+
+Delete a specific stack by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### DELETE /stacks/{id}/assets/{assetId}
+
+Summary: Remove an asset from a stack
+
+Remove a specific asset from a stack by providing the stack ID and asset ID.
+
+Parameters:
+- `assetId` (path, string, required)
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /sync/ack
+
+Summary: Retrieve acknowledgements
+
+Retrieve the synchronization acknowledgments for the current session.
+
+Responses:
+- 200
+
+##### POST /sync/ack
+
+Summary: Acknowledge changes
+
+Send a list of synchronization acknowledgements to confirm that the latest changes have been received.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### DELETE /sync/ack
+
+Summary: Delete acknowledgements
+
+Delete specific synchronization acknowledgments.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### POST /sync/stream
+
+Summary: Stream sync changes
+
+Retrieve a JSON lines streamed response of changes for synchronization. This endpoint is used by the mobile app to efficiently stay up to date with changes.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /system-config
+
+Summary: Get system configuration
+
+Retrieve the current system configuration.
+
+Responses:
+- 200
+
+##### PUT /system-config
+
+Summary: Update system configuration
+
+Update the system configuration with a new system configuration.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /system-config/defaults
+
+Summary: Get system configuration defaults
+
+Retrieve the default values for the system configuration.
+
+Responses:
+- 200
+
+##### GET /system-config/storage-template-options
+
+Summary: Get storage template options
+
+Retrieve exemplary storage template options.
+
+Responses:
+- 200
+
+##### GET /system-metadata/admin-onboarding
+
+Summary: Retrieve admin onboarding
+
+Retrieve the current admin onboarding status.
+
+Responses:
+- 200
+
+##### POST /system-metadata/admin-onboarding
+
+Summary: Update admin onboarding
+
+Update the admin onboarding status.
+
+Request body: application/json
+
+Responses:
+- 204
+
+##### GET /system-metadata/reverse-geocoding-state
+
+Summary: Retrieve reverse geocoding state
+
+Retrieve the current state of the reverse geocoding import.
+
+Responses:
+- 200
+
+##### GET /system-metadata/version-check-state
+
+Summary: Retrieve version check state
+
+Retrieve the current state of the version check process.
+
+Responses:
+- 200
+
+##### GET /tags
+
+Summary: Retrieve tags
+
+Retrieve a list of all tags.
+
+Responses:
+- 200
+
+##### POST /tags
+
+Summary: Create a tag
+
+Create a new tag by providing a name and optional color.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### PUT /tags
+
+Summary: Upsert tags
+
+Create or update multiple tags in a single request.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### PUT /tags/assets
+
+Summary: Tag assets
+
+Add multiple tags to multiple assets in a single request.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /tags/{id}
+
+Summary: Retrieve a tag
+
+Retrieve a specific tag by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /tags/{id}
+
+Summary: Update a tag
+
+Update an existing tag identified by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /tags/{id}
+
+Summary: Delete a tag
+
+Delete a specific tag by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### PUT /tags/{id}/assets
+
+Summary: Tag assets
+
+Add a tag to all the specified assets.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /tags/{id}/assets
+
+Summary: Untag assets
+
+Remove a tag from all the specified assets.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /timeline/bucket
+
+Summary: Get time bucket
+
+Retrieve a string of all asset ids in a given time bucket.
+
+Parameters:
+- `albumId` (query, string, optional) - Filter assets belonging to a specific album
+- `bbox` (query, string, optional) - Bounding box coordinates as west,south,east,north (WGS84)
+- `isFavorite` (query, boolean, optional) - Filter by favorite status (true for favorites only, false for non-favorites only)
+- `isTrashed` (query, boolean, optional) - Filter by trash status (true for trashed assets only, false for non-trashed only)
+- `key` (query, string, optional)
+- `order` (query, string, optional) - Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)
+- `orderBy` (query, string, optional) - Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)
+- `personId` (query, string, optional) - Filter assets containing a specific person (face recognition)
+- `slug` (query, string, optional)
+- `tagId` (query, string, optional) - Filter assets with a specific tag
+- `timeBucket` (query, string, required) - Time bucket identifier in YYYY-MM-DD format
+- `userId` (query, string, optional) - Filter assets by specific user ID
+- `visibility` (query, string, optional) - Filter by asset visibility status (ARCHIVE, TIMELINE, HIDDEN, LOCKED)
+- `withCoordinates` (query, boolean, optional) - Include location data in the response
+- `withPartners` (query, boolean, optional) - Include assets shared by partners
+- `withStacked` (query, boolean, optional) - Include stacked assets in the response. When true, only primary assets from stacks are returned.
+
+Responses:
+- 200
+
+##### GET /timeline/buckets
+
+Summary: Get time buckets
+
+Retrieve a list of all minimal time buckets.
+
+Parameters:
+- `albumId` (query, string, optional) - Filter assets belonging to a specific album
+- `bbox` (query, string, optional) - Bounding box coordinates as west,south,east,north (WGS84)
+- `isFavorite` (query, boolean, optional) - Filter by favorite status (true for favorites only, false for non-favorites only)
+- `isTrashed` (query, boolean, optional) - Filter by trash status (true for trashed assets only, false for non-trashed only)
+- `key` (query, string, optional)
+- `order` (query, string, optional) - Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)
+- `orderBy` (query, string, optional) - Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)
+- `personId` (query, string, optional) - Filter assets containing a specific person (face recognition)
+- `slug` (query, string, optional)
+- `tagId` (query, string, optional) - Filter assets with a specific tag
+- `userId` (query, string, optional) - Filter assets by specific user ID
+- `visibility` (query, string, optional) - Filter by asset visibility status (ARCHIVE, TIMELINE, HIDDEN, LOCKED)
+- `withCoordinates` (query, boolean, optional) - Include location data in the response
+- `withPartners` (query, boolean, optional) - Include assets shared by partners
+- `withStacked` (query, boolean, optional) - Include stacked assets in the response. When true, only primary assets from stacks are returned.
+
+Responses:
+- 200
+
+##### POST /trash/empty
+
+Summary: Empty trash
+
+Permanently delete all items in the trash.
+
+Responses:
+- 200
+
+##### POST /trash/restore
+
+Summary: Restore trash
+
+Restore all items in the trash.
+
+Responses:
+- 200
+
+##### POST /trash/restore/assets
+
+Summary: Restore assets
+
+Restore specific assets from the trash.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /users
+
+Summary: Get all users
+
+Retrieve a list of all users on the server.
+
+Responses:
+- 200
+
+##### GET /users/me
+
+Summary: Get current user
+
+Retrieve information about the user making the API request.
+
+Responses:
+- 200
+
+##### PUT /users/me
+
+Summary: Update current user
+
+Update the current user making the API request.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### GET /users/me/calendar-heatmap
+
+Summary: Retrieve calendar heatmap activity
+
+Retrieve activity counts for a specified period, in a calendar heatmap format.
+
+Parameters:
+- `from` (query, string, optional) - Start date in UTC
+- `to` (query, string, optional) - End date in UTC
+- `type` (query, string, optional)
+
+Responses:
+- 200
+
+##### GET /users/me/license
+
+Summary: Retrieve user product key
+
+Retrieve information about whether the current user has a registered product key.
+
+Responses:
+- 200
+
+##### PUT /users/me/license
+
+Summary: Set user product key
+
+Register a product key for the current user.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /users/me/license
+
+Summary: Delete user product key
+
+Delete the registered product key for the current user.
+
+Responses:
+- 204
+
+##### GET /users/me/onboarding
+
+Summary: Retrieve user onboarding
+
+Retrieve the onboarding status of the current user.
+
+Responses:
+- 200
+
+##### PUT /users/me/onboarding
+
+Summary: Update user onboarding
+
+Update the onboarding status of the current user.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /users/me/onboarding
+
+Summary: Delete user onboarding
+
+Delete the onboarding status of the current user.
+
+Responses:
+- 204
+
+##### GET /users/me/preferences
+
+Summary: Get my preferences
+
+Retrieve the preferences for the current user.
+
+Responses:
+- 200
+
+##### PUT /users/me/preferences
+
+Summary: Update my preferences
+
+Update the preferences of the current user.
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### POST /users/profile-image
+
+Summary: Create user profile image
+
+Upload and set a new profile image for the current user.
+
+Request body: multipart/form-data
+
+Responses:
+- 201
+
+##### DELETE /users/profile-image
+
+Summary: Delete user profile image
+
+Delete the profile image of the current user.
+
+Responses:
+- 204
+
+##### GET /users/{id}
+
+Summary: Retrieve a user
+
+Retrieve a specific user by their ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /users/{id}/profile-image
+
+Summary: Retrieve user profile image
+
+Retrieve the profile image file for a user.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### GET /view/folder
+
+Summary: Retrieve assets by original path
+
+Retrieve assets that are children of a specific folder.
+
+Parameters:
+- `path` (query, string, required)
+
+Responses:
+- 200
+
+##### GET /view/folder/unique-paths
+
+Summary: Retrieve unique paths
+
+Retrieve a list of unique folder paths from asset original paths.
+
+Responses:
+- 200
+
+##### GET /workflows
+
+Summary: List all workflows
+
+Retrieve a list of workflows available to the authenticated user.
+
+Parameters:
+- `description` (query, string, optional) - Workflow description
+- `enabled` (query, boolean, optional) - Workflow enabled
+- `id` (query, string, optional) - Workflow ID
+- `name` (query, string, optional) - Workflow name
+- `trigger` (query, string, optional) - Workflow trigger type
+
+Responses:
+- 200
+
+##### POST /workflows
+
+Summary: Create a workflow
+
+Create a new workflow, the workflow can also be created with empty filters and actions.
+
+Request body: application/json
+
+Responses:
+- 201
+
+##### GET /workflows/triggers
+
+Summary: List all workflow triggers
+
+Retrieve a list of all available workflow triggers.
+
+Responses:
+- 200
+
+##### GET /workflows/{id}
+
+Summary: Retrieve a workflow
+
+Retrieve information about a specific workflow by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+##### PUT /workflows/{id}
+
+Summary: Update a workflow
+
+Update the information of a specific workflow by its ID. This endpoint can be used to update the workflow name, description, trigger type, filters and actions order, etc.
+
+Parameters:
+- `id` (path, string, required)
+
+Request body: application/json
+
+Responses:
+- 200
+
+##### DELETE /workflows/{id}
+
+Summary: Delete a workflow
+
+Delete a workflow by its ID.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 204
+
+##### GET /workflows/{id}/share
+
+Summary: Retrieve a workflow
+
+Retrieve a workflow details without ids, default values, etc.
+
+Parameters:
+- `id` (path, string, required)
+
+Responses:
+- 200
+
+#### Models
+
+- ActivityCreateDto: Activity create
+- ActivityResponseDto
+- ActivityStatisticsResponseDto
+- AddUsersDto
+- AdminOnboardingUpdateDto
+- AlbumResponseDto
+- AlbumStatisticsResponseDto
+- AlbumUserAddDto
+- AlbumUserCreateDto
+- AlbumUserResponseDto
+- AlbumUserRole: Album user role
+- AlbumsAddAssetsDto
+- AlbumsAddAssetsResponseDto
+- AlbumsResponse
+- AlbumsUpdate: Album preferences
+- ApiKeyCreateDto
+- ApiKeyCreateResponseDto
+- ApiKeyResponseDto
+- ApiKeyUpdateDto
+- AssetBulkDeleteDto
+- AssetBulkUpdateDto
+- AssetBulkUploadCheckDto
+- AssetBulkUploadCheckItem
+- AssetBulkUploadCheckResponseDto
+- AssetBulkUploadCheckResult
+- AssetCopyDto
+- AssetEditAction: Type of edit action to perform
+- AssetEditActionItemDto
+- AssetEditActionItemResponseDto
+- AssetEditsCreateDto
+- AssetEditsResponseDto
+- AssetFaceCreateDto
+- AssetFaceDeleteDto
+- AssetFaceResponseDto: Asset face with person
+- AssetFaceUpdateDto
+- AssetFaceUpdateItem
+- AssetIdErrorReason: Error reason if failed
+- AssetIdsDto
+- AssetIdsResponseDto
+- AssetJobName: Job name
+- AssetJobsDto
+- AssetMediaCreateDto
+- AssetMediaResponseDto
+- AssetMediaSize: Asset media size
+- AssetMediaStatus: Upload status
+- AssetMetadataBulkDeleteDto
+- AssetMetadataBulkDeleteItemDto
+- AssetMetadataBulkResponseDto
+- AssetMetadataBulkUpsertDto
+- AssetMetadataBulkUpsertItemDto
+- AssetMetadataResponseDto
+- AssetMetadataUpsertDto
+- AssetMetadataUpsertItemDto
+- AssetOcrResponseDto
+- AssetOrder: Asset sort order
+- AssetOrderBy: Asset sorting property
+- AssetRejectReason: Rejection reason if rejected
+- AssetResponseDto
+- AssetStackResponseDto
+- AssetStatsResponseDto
+- AssetTypeEnum: Asset type
+- AssetUploadAction: Upload action
+- AssetVisibility: Asset visibility
+- AudioCodec: Target audio codec
+- AuthStatusResponseDto
+- AvatarUpdate
+- BulkIdErrorReason: Error reason
+- BulkIdResponseDto
+- BulkIdsDto
+- CLIPConfig
+- CQMode: CQ mode
+- CalendarHeatmapResponseDto
+- CalendarHeatmapType: Type of calendar heatmap
+- CastResponse
+- CastUpdate
+- ChangePasswordDto
+- Colorspace: Colorspace
+- ContributorCountResponseDto
+- CreateAlbumDto
+- CreateLibraryDto
+- CreateProfileImageDto
+- CreateProfileImageResponseDto
+- CropParameters
+- DatabaseBackupConfig
+- DatabaseBackupDeleteDto
+- DatabaseBackupDto
+- DatabaseBackupListResponseDto
+- DatabaseBackupUploadDto
+- DownloadArchiveDto
+- DownloadArchiveInfo
+- DownloadInfoDto
+- DownloadResponse
+- DownloadResponseDto
+- DownloadUpdate
+- DuplicateDetectionConfig
+- DuplicateResolveDto
+- DuplicateResolveGroupDto
+- DuplicateResponseDto
+- EmailNotificationsResponse
+- EmailNotificationsUpdate
+- ExifResponseDto: EXIF response
+- FaceDto
+- FacialRecognitionConfig
+- FoldersResponse
+- FoldersUpdate
+- ImageFormat: Image format
+- IntegrityReport: Integrity report type
+- IntegrityReportResponseDto
+- IntegrityReportSummaryResponseDto
+- JobCreateDto
+- JobName: Job name
+- JobSettingsDto
+- LibraryResponseDto
+- LibraryStatsResponseDto
+- LicenseKeyDto
+- LicenseResponseDto
+- LogLevel: Log level
+- LoginCredentialDto
+- LoginResponseDto
+- LogoutResponseDto
+- MachineLearningAvailabilityChecksDto
+- MaintenanceAction: Maintenance action
+- MaintenanceAuthDto
+- MaintenanceDetectInstallResponseDto
+- MaintenanceDetectInstallStorageFolderDto
+- MaintenanceLoginDto
+- MaintenanceStatusResponseDto
+- ManualJobName: Manual job name
+- MapMarkerResponseDto
+- MapReverseGeocodeResponseDto
+- MemoriesResponse
+- MemoriesUpdate
+- MemoryCreateDto
+- MemoryResponseDto
+- MemorySearchOrder: Sort order
+- MemoryStatisticsResponseDto
+- MemoryType: Memory type
+- MemoryUpdateDto
+- MergePersonDto
+- MetadataSearchDto
+- MirrorAxis: Axis to mirror along
+- MirrorParameters
+- NotificationCreateDto
+- NotificationDeleteAllDto
+- NotificationDto
+- NotificationLevel: Notification level
+- NotificationType: Notification type
+- NotificationUpdateAllDto
+- NotificationUpdateDto
+- OAuthAuthorizeResponseDto
+- OAuthBackchannelLogoutDto
+- OAuthCallbackDto
+- OAuthConfigDto
+- OAuthTokenEndpointAuthMethod: OAuth token endpoint auth method
+- OcrConfig
+- OnThisDayDto
+- OnboardingDto
+- OnboardingResponseDto
+- PartnerCreateDto
+- PartnerDirection: Partner direction
+- PartnerResponseDto: Partner response
+- PartnerUpdateDto
+- PeopleResponse
+- PeopleResponseDto: People response
+- PeopleUpdate
+- PeopleUpdateDto
+- PeopleUpdateItem
+- Permission: List of permissions
+- PersonCreateDto
+- PersonResponseDto
+- PersonStatisticsResponseDto
+- PersonUpdateDto
+- PinCodeChangeDto
+- PinCodeResetDto
+- PinCodeSetupDto
+- PlacesResponseDto
+- PluginMethodResponseDto
+- PluginResponseDto
+- PluginTemplateResponseDto
+- PluginTemplateStepResponseDto
+- PurchaseResponse
+- PurchaseUpdate
+- QueueCommand: Queue command to execute
+- QueueCommandDto
+- QueueDeleteDto
+- QueueJobResponseDto
+- QueueJobStatus: Queue job status
+- QueueName: Queue name
+- QueueResponseDto
+- QueueResponseLegacyDto
+- QueueStatisticsDto
+- QueueStatusLegacyDto
+- QueueUpdateDto
+- QueuesResponseLegacyDto
+- RandomSearchDto
+- RatingsResponse
+- RatingsUpdate
+- ReactionLevel: Reaction level
+- ReactionType: Reaction type
+- ReleaseChannel: Release channel
+- ReleaseEventV1
+- ReleaseType
+- ReverseGeocodingStateResponseDto
+- RotateParameters
+- SearchAlbumResponseDto
+- SearchAssetResponseDto
+- SearchExploreItem
+- SearchExploreResponseDto
+- SearchFacetCountResponseDto
+- SearchFacetResponseDto
+- SearchResponseDto
+- SearchStatisticsResponseDto
+- SearchSuggestionType: Suggestion type
+- ServerAboutResponseDto
+- ServerApkLinksDto
+- ServerConfigDto
+- ServerFeaturesDto
+- ServerMediaTypesResponseDto
+- ServerPingResponse
+- ServerStatsResponseDto
+- ServerStorageResponseDto
+- ServerVersionHistoryResponseDto
+- ServerVersionResponseDto
+- SessionCreateDto
+- SessionCreateResponseDto
+- SessionResponseDto
+- SessionUnlockDto
+- SessionUpdateDto
+- SetMaintenanceModeDto
+- SharedLinkCreateDto
+- SharedLinkEditDto
+- SharedLinkLoginDto
+- SharedLinkResponseDto: Shared link response
+- SharedLinkType: Shared link type
+- SharedLinksResponse
+- SharedLinksUpdate
+- SignUpDto
+- SmartSearchDto
+- SourceType: Face detection source type
+- StackCreateDto
+- StackResponseDto: Stack response
+- StackUpdateDto
+- StatisticsSearchDto
+- StorageFolder: Storage folder
+- SyncAckDeleteDto
+- SyncAckDto
+- SyncAckSetDto
+- SyncAckV1
+- SyncAlbumDeleteV1
+- SyncAlbumToAssetDeleteV1
+- SyncAlbumToAssetV1
+- SyncAlbumUserDeleteV1
+- SyncAlbumUserV1
+- SyncAlbumV1
+- SyncAlbumV2
+- SyncAssetDeleteV1
+- SyncAssetEditDeleteV1
+- SyncAssetEditV1
+- SyncAssetExifV1
+- SyncAssetFaceDeleteV1
+- SyncAssetFaceV1
+- SyncAssetFaceV2
+- SyncAssetMetadataDeleteV1
+- SyncAssetMetadataV1
+- SyncAssetOcrDeleteV1
+- SyncAssetOcrV1
+- SyncAssetV1
+- SyncAssetV2
+- SyncAuthUserV1
+- SyncCompleteV1
+- SyncEntityType: Sync entity type
+- SyncMemoryAssetDeleteV1
+- SyncMemoryAssetV1
+- SyncMemoryDeleteV1
+- SyncMemoryV1
+- SyncPartnerDeleteV1
+- SyncPartnerV1
+- SyncPersonDeleteV1
+- SyncPersonV1
+- SyncRequestType: Sync request type
+- SyncResetV1
+- SyncStackDeleteV1
+- SyncStackV1
+- SyncStreamDto
+- SyncUserDeleteV1
+- SyncUserMetadataDeleteV1
+- SyncUserMetadataV1
+- SyncUserV1
+- SystemConfigBackupsDto
+- SystemConfigDto: System configuration
+- SystemConfigFFmpegDto
+- SystemConfigFFmpegRealtimeDto
+- SystemConfigFacesDto
+- SystemConfigGeneratedFullsizeImageDto
+- SystemConfigGeneratedImageDto
+- SystemConfigImageDto
+- SystemConfigIntegrityChecks: Integrity checks config
+- SystemConfigIntegrityChecksumJob: Integrity checksum job config
+- SystemConfigIntegrityJob: Integrity job config
+- SystemConfigJobDto
+- SystemConfigLibraryDto
+- SystemConfigLibraryScanDto
+- SystemConfigLibraryWatchDto
+- SystemConfigLoggingDto
+- SystemConfigMachineLearningDto
+- SystemConfigMapDto
+- SystemConfigMetadataDto
+- SystemConfigNewVersionCheckDto
+- SystemConfigNightlyTasksDto
+- SystemConfigNotificationsDto
+- SystemConfigOAuthDto
+- SystemConfigPasswordLoginDto
+- SystemConfigReverseGeocodingDto
+- SystemConfigServerDto
+- SystemConfigSmtpDto
+- SystemConfigSmtpTransportDto
+- SystemConfigStorageTemplateDto
+- SystemConfigTemplateEmailsDto
+- SystemConfigTemplateStorageOptionDto
+- SystemConfigTemplatesDto
+- SystemConfigThemeDto
+- SystemConfigTrashDto
+- SystemConfigUserDto
+- TagBulkAssetsDto
+- TagBulkAssetsResponseDto
+- TagCreateDto
+- TagResponseDto
+- TagUpdateDto
+- TagUpsertDto
+- TagsResponse
+- TagsUpdate
+- TemplateDto
+- TemplateResponseDto
+- TestEmailResponseDto
+- TimeBucketAssetResponseDto
+- TimeBucketsResponseDto
+- ToneMapping: Tone mapping
+- TranscodeHWAccel: Transcode hardware acceleration
+- TranscodePolicy: Transcode policy
+- TrashResponseDto
+- UpdateAlbumDto
+- UpdateAlbumUserDto
+- UpdateAssetDto
+- UpdateLibraryDto
+- UsageByUserDto
+- UserAdminCreateDto
+- UserAdminDeleteDto
+- UserAdminResponseDto
+- UserAdminUpdateDto
+- UserAvatarColor: User avatar color
+- UserLicense
+- UserMetadataKey: User metadata key
+- UserPreferencesResponseDto
+- UserPreferencesUpdateDto
+- UserResponseDto
+- UserStatus: User status
+- UserUpdateMeDto
+- ValidateAccessTokenResponseDto
+- ValidateLibraryDto
+- ValidateLibraryImportPathResponseDto
+- ValidateLibraryResponseDto
+- VersionCheckStateResponseDto
+- VideoCodec: Target video codec
+- VideoContainer: Accepted video containers
+- WorkflowCreateDto
+- WorkflowResponseDto
+- WorkflowShareResponseDto
+- WorkflowShareStepDto
+- WorkflowStepDto
+- WorkflowTrigger: Plugin trigger type
+- WorkflowTriggerResponseDto
+- WorkflowType: Workflow type
+- WorkflowUpdateDto

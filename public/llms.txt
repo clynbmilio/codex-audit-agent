@@ -1,0 +1,261 @@
+# Immich API Reference
+
+> Immich API
+
+## API Reference
+
+- [Immich](/api.html): Immich API
+- [List all activities](/api.html#operation-activities-get): GET /activities - Returns a list of activities for the selected asset or album. The activities are returned in sorted order, with the oldest activities appearing first.
+- [Create an activity](/api.html#operation-activities-post): POST /activities - Create a like or a comment for an album, or an asset in an album.
+- [Retrieve activity statistics](/api.html#operation-activities-statistics-get): GET /activities/statistics - Returns the number of likes and comments for a given album or asset in an album.
+- [Delete an activity](/api.html#operation-activities-id-delete): DELETE /activities/{id} - Removes a like or comment from a given album or asset in an album.
+- [Unlink all OAuth accounts](/api.html#operation-admin-auth-unlink-all-post): POST /admin/auth/unlink-all - Unlinks all OAuth accounts associated with user accounts in the system.
+- [List database backups](/api.html#operation-admin-database-backups-get): GET /admin/database-backups - Get the list of the successful and failed backups
+- [Delete database backup](/api.html#operation-admin-database-backups-delete): DELETE /admin/database-backups - Delete a backup by its filename
+- [Start database backup restore flow](/api.html#operation-admin-database-backups-start-restore-post): POST /admin/database-backups/start-restore - Put Immich into maintenance mode to restore a backup (Immich must not be configured)
+- [Upload database backup](/api.html#operation-admin-database-backups-upload-post): POST /admin/database-backups/upload - Uploads .sql/.sql.gz file to restore backup from
+- [Download database backup](/api.html#operation-admin-database-backups-filename-get): GET /admin/database-backups/{filename} - Downloads the database backup file
+- [Get integrity report by type](/api.html#operation-admin-integrity-report-get): GET /admin/integrity/report - Get all flagged items by integrity report type
+- [Delete integrity report item](/api.html#operation-admin-integrity-report-id-delete): DELETE /admin/integrity/report/{id} - Delete a given report item and perform corresponding deletion (e.g. trash asset, delete file)
+- [Download flagged file](/api.html#operation-admin-integrity-report-id-file-get): GET /admin/integrity/report/{id}/file - Download the untracked/broken file if one exists
+- [Export integrity report by type as CSV](/api.html#operation-admin-integrity-report-type-csv-get): GET /admin/integrity/report/{type}/csv - Get all integrity report entries for a given type as a CSV
+- [Get integrity report summary](/api.html#operation-admin-integrity-summary-get): GET /admin/integrity/summary - Get a count of the items flagged in each integrity report
+- [Set maintenance mode](/api.html#operation-admin-maintenance-post): POST /admin/maintenance - Put Immich into or take it out of maintenance mode
+- [Detect existing install](/api.html#operation-admin-maintenance-detect-install-get): GET /admin/maintenance/detect-install - Collect integrity checks and other heuristics about local data.
+- [Log into maintenance mode](/api.html#operation-admin-maintenance-login-post): POST /admin/maintenance/login - Login with maintenance token or cookie to receive current information and perform further actions.
+- [Get maintenance mode status](/api.html#operation-admin-maintenance-status-get): GET /admin/maintenance/status - Fetch information about the currently running maintenance action.
+- [Create a notification](/api.html#operation-admin-notifications-post): POST /admin/notifications - Create a new notification for a specific user.
+- [Render email template](/api.html#operation-admin-notifications-templates-name-post): POST /admin/notifications/templates/{name} - Retrieve a preview of the provided email template.
+- [Send test email](/api.html#operation-admin-notifications-test-email-post): POST /admin/notifications/test-email - Send a test email using the provided SMTP configuration.
+- [Search users](/api.html#operation-admin-users-get): GET /admin/users - Search for users.
+- [Create a user](/api.html#operation-admin-users-post): POST /admin/users - Create a new user.
+- [Retrieve a user](/api.html#operation-admin-users-id-get): GET /admin/users/{id} - Retrieve  a specific user by their ID.
+- [Update a user](/api.html#operation-admin-users-id-put): PUT /admin/users/{id} - Update an existing user.
+- [Delete a user](/api.html#operation-admin-users-id-delete): DELETE /admin/users/{id} - Delete a user.
+- [Retrieve calendar heatmap activity](/api.html#operation-admin-users-id-calendar-heatmap-get): GET /admin/users/{id}/calendar-heatmap - Retrieve activity counts for a specified period, in a calendar heatmap format.
+- [Retrieve user preferences](/api.html#operation-admin-users-id-preferences-get): GET /admin/users/{id}/preferences - Retrieve the preferences of a specific user.
+- [Update user preferences](/api.html#operation-admin-users-id-preferences-put): PUT /admin/users/{id}/preferences - Update the preferences of a specific user.
+- [Restore a deleted user](/api.html#operation-admin-users-id-restore-post): POST /admin/users/{id}/restore - Restore a previously deleted user.
+- [Retrieve user sessions](/api.html#operation-admin-users-id-sessions-get): GET /admin/users/{id}/sessions - Retrieve all sessions for a specific user.
+- [Retrieve user statistics](/api.html#operation-admin-users-id-statistics-get): GET /admin/users/{id}/statistics - Retrieve asset statistics for a specific user.
+- [List all albums](/api.html#operation-albums-get): GET /albums - Retrieve a list of albums available to the authenticated user.
+- [Create an album](/api.html#operation-albums-post): POST /albums - Create a new album. The album can also be created with initial users and assets.
+- [Add assets to albums](/api.html#operation-albums-assets-put): PUT /albums/assets - Send a list of asset IDs and album IDs to add each asset to each album.
+- [Retrieve album statistics](/api.html#operation-albums-statistics-get): GET /albums/statistics - Returns statistics about the albums available to the authenticated user.
+- [Retrieve an album](/api.html#operation-albums-id-get): GET /albums/{id} - Retrieve information about a specific album by its ID.
+- [Delete an album](/api.html#operation-albums-id-delete): DELETE /albums/{id} - Delete a specific album by its ID. Note the album is initially trashed and then immediately scheduled for deletion, but relies on a background job to complete the process.
+- [Update an album](/api.html#operation-albums-id-patch): PATCH /albums/{id} - Update the information of a specific album by its ID. This endpoint can be used to update the album name, description, sort order, etc. However, it is not used to add or remove assets or users from the album.
+- [Add assets to an album](/api.html#operation-albums-id-assets-put): PUT /albums/{id}/assets - Add multiple assets to a specific album by its ID.
+- [Remove assets from an album](/api.html#operation-albums-id-assets-delete): DELETE /albums/{id}/assets - Remove multiple assets from a specific album by its ID.
+- [Retrieve album map markers](/api.html#operation-albums-id-map-markers-get): GET /albums/{id}/map-markers - Retrieve map marker information for a specific album by its ID.
+- [Update user role](/api.html#operation-albums-id-user-userid-put): PUT /albums/{id}/user/{userId} - Change the role for a specific user in a specific album.
+- [Remove user from album](/api.html#operation-albums-id-user-userid-delete): DELETE /albums/{id}/user/{userId} - Remove a user from an album. Use an ID of "me" to leave a shared album.
+- [Share album with users](/api.html#operation-albums-id-users-put): PUT /albums/{id}/users - Share an album with multiple users. Each user can be given a specific role in the album.
+- [List all API keys](/api.html#operation-api-keys-get): GET /api-keys - Retrieve all API keys of the current user.
+- [Create an API key](/api.html#operation-api-keys-post): POST /api-keys - Creates a new API key. It will be limited to the permissions specified.
+- [Retrieve the current API key](/api.html#operation-api-keys-me-get): GET /api-keys/me - Retrieve the API key that is used to access this endpoint.
+- [Retrieve an API key](/api.html#operation-api-keys-id-get): GET /api-keys/{id} - Retrieve an API key by its ID. The current user must own this API key.
+- [Update an API key](/api.html#operation-api-keys-id-put): PUT /api-keys/{id} - Updates the name and permissions of an API key by its ID. The current user must own this API key.
+- [Delete an API key](/api.html#operation-api-keys-id-delete): DELETE /api-keys/{id} - Deletes an API key identified by its ID. The current user must own this API key.
+- [Upload asset](/api.html#operation-assets-post): POST /assets - Uploads a new asset to the server.
+- [Update assets](/api.html#operation-assets-put): PUT /assets - Updates multiple assets at the same time.
+- [Delete assets](/api.html#operation-assets-delete): DELETE /assets - Deletes multiple assets at the same time.
+- [Check bulk upload](/api.html#operation-assets-bulk-upload-check-post): POST /assets/bulk-upload-check - Determine which assets have already been uploaded to the server based on their SHA1 checksums.
+- [Copy asset](/api.html#operation-assets-copy-put): PUT /assets/copy - Copy asset information like albums, tags, etc. from one asset to another.
+- [Run an asset job](/api.html#operation-assets-jobs-post): POST /assets/jobs - Run a specific job on a set of assets.
+- [Upsert asset metadata](/api.html#operation-assets-metadata-put): PUT /assets/metadata - Upsert metadata key-value pairs for multiple assets.
+- [Delete asset metadata](/api.html#operation-assets-metadata-delete): DELETE /assets/metadata - Delete metadata key-value pairs for multiple assets.
+- [Get asset statistics](/api.html#operation-assets-statistics-get): GET /assets/statistics - Retrieve various statistics about the assets owned by the authenticated user.
+- [Retrieve an asset](/api.html#operation-assets-id-get): GET /assets/{id} - Retrieve detailed information about a specific asset.
+- [Update an asset](/api.html#operation-assets-id-put): PUT /assets/{id} - Update information of a specific asset.
+- [Retrieve edits for an existing asset](/api.html#operation-assets-id-edits-get): GET /assets/{id}/edits - Retrieve a series of edit actions (crop, rotate, mirror) associated with the specified asset.
+- [Apply edits to an existing asset](/api.html#operation-assets-id-edits-put): PUT /assets/{id}/edits - Apply a series of edit actions (crop, rotate, mirror) to the specified asset.
+- [Remove edits from an existing asset](/api.html#operation-assets-id-edits-delete): DELETE /assets/{id}/edits - Removes all edit actions (crop, rotate, mirror) associated with the specified asset.
+- [Get asset metadata](/api.html#operation-assets-id-metadata-get): GET /assets/{id}/metadata - Retrieve all metadata key-value pairs associated with the specified asset.
+- [Update asset metadata](/api.html#operation-assets-id-metadata-put): PUT /assets/{id}/metadata - Update or add metadata key-value pairs for the specified asset.
+- [Retrieve asset metadata by key](/api.html#operation-assets-id-metadata-key-get): GET /assets/{id}/metadata/{key} - Retrieve the value of a specific metadata key associated with the specified asset.
+- [Delete asset metadata by key](/api.html#operation-assets-id-metadata-key-delete): DELETE /assets/{id}/metadata/{key} - Delete a specific metadata key-value pair associated with the specified asset.
+- [Retrieve asset OCR data](/api.html#operation-assets-id-ocr-get): GET /assets/{id}/ocr - Retrieve all OCR (Optical Character Recognition) data associated with the specified asset.
+- [Download original asset](/api.html#operation-assets-id-original-get): GET /assets/{id}/original - Downloads the original file of the specified asset.
+- [View asset thumbnail](/api.html#operation-assets-id-thumbnail-get): GET /assets/{id}/thumbnail - Retrieve the thumbnail image for the specified asset. Viewing the fullsize thumbnail might redirect to downloadAsset, which requires a different permission.
+- [Play asset video](/api.html#operation-assets-id-video-playback-get): GET /assets/{id}/video/playback - Streams the video file for the specified asset. This endpoint also supports byte range requests.
+- [Get HLS main playlist](/api.html#operation-assets-id-video-stream-main-m3u8-get): GET /assets/{id}/video/stream/main.m3u8 - Returns an HLS main playlist with all available variants for the asset.
+- [End HLS streaming session](/api.html#operation-assets-id-video-stream-sessionid-delete): DELETE /assets/{id}/video/stream/{sessionId} - Releases server resources for the streaming session.
+- [Get HLS media playlist](/api.html#operation-assets-id-video-stream-sessionid-variantindex-playlist-m3u8-get): GET /assets/{id}/video/stream/{sessionId}/{variantIndex}/playlist.m3u8 - Returns an HLS media playlist for one variant of the streaming session.
+- [Get HLS segment or init file](/api.html#operation-assets-id-video-stream-sessionid-variantindex-filename-get): GET /assets/{id}/video/stream/{sessionId}/{variantIndex}/{filename} - Streams an HLS init segment (init.mp4) or media segment (seg_N.m4s).
+- [Register admin](/api.html#operation-auth-admin-sign-up-post): POST /auth/admin-sign-up - Create the first admin user in the system.
+- [Change password](/api.html#operation-auth-change-password-post): POST /auth/change-password - Change the password of the current user.
+- [Login](/api.html#operation-auth-login-post): POST /auth/login - Login with username and password and receive a session token.
+- [Logout](/api.html#operation-auth-logout-post): POST /auth/logout - Logout the current user and invalidate the session token.
+- [Setup pin code](/api.html#operation-auth-pin-code-post): POST /auth/pin-code - Setup a new pin code for the current user.
+- [Change pin code](/api.html#operation-auth-pin-code-put): PUT /auth/pin-code - Change the pin code for the current user.
+- [Reset pin code](/api.html#operation-auth-pin-code-delete): DELETE /auth/pin-code - Reset the pin code for the current user by providing the account password
+- [Lock auth session](/api.html#operation-auth-session-lock-post): POST /auth/session/lock - Remove elevated access to locked assets from the current session.
+- [Unlock auth session](/api.html#operation-auth-session-unlock-post): POST /auth/session/unlock - Temporarily grant the session elevated access to locked assets by providing the correct PIN code.
+- [Retrieve auth status](/api.html#operation-auth-status-get): GET /auth/status - Get information about the current session, including whether the user has a password, and if the session can access locked assets.
+- [Validate access token](/api.html#operation-auth-validatetoken-post): POST /auth/validateToken - Validate the current authorization method is still valid.
+- [Download asset archive](/api.html#operation-download-archive-post): POST /download/archive - Download a ZIP archive containing the specified assets. The assets must have been previously requested via the "getDownloadInfo" endpoint.
+- [Retrieve download information](/api.html#operation-download-info-post): POST /download/info - Retrieve information about how to request a download for the specified assets or album. The response includes groups of assets that can be downloaded together.
+- [Retrieve duplicates](/api.html#operation-duplicates-get): GET /duplicates - Retrieve a list of duplicate assets available to the authenticated user.
+- [Delete duplicates](/api.html#operation-duplicates-delete): DELETE /duplicates - Delete multiple duplicate assets specified by their IDs.
+- [Resolve duplicate groups](/api.html#operation-duplicates-resolve-post): POST /duplicates/resolve - Resolve duplicate groups by synchronizing metadata across assets and deleting/trashing duplicates.
+- [Dismiss a duplicate group](/api.html#operation-duplicates-id-delete): DELETE /duplicates/{id} - Dismiss a duplicate group by its ID, unlinking all assets in the group without deleting them.
+- [Retrieve faces for asset](/api.html#operation-faces-get): GET /faces - Retrieve all faces belonging to an asset.
+- [Create a face](/api.html#operation-faces-post): POST /faces - Create a new face that has not been discovered by facial recognition. The content of the bounding box is considered a face.
+- [Re-assign a face to another person](/api.html#operation-faces-id-put): PUT /faces/{id} - Re-assign the face provided in the body to the person identified by the id in the path parameter.
+- [Delete a face](/api.html#operation-faces-id-delete): DELETE /faces/{id} - Delete a face identified by the id. Optionally can be force deleted.
+- [Retrieve queue counts and status](/api.html#operation-jobs-get): GET /jobs - Retrieve the counts of the current queue, as well as the current status.
+- [Create a manual job](/api.html#operation-jobs-post): POST /jobs - Run a specific job. Most jobs are queued automatically, but this endpoint allows for manual creation of a handful of jobs, including various cleanup tasks, as well as creating a new database backup.
+- [Run jobs](/api.html#operation-jobs-name-put): PUT /jobs/{name} - Queue all assets for a specific job type. Defaults to only queueing assets that have not yet been processed, but the force command can be used to re-process all assets.
+- [Retrieve libraries](/api.html#operation-libraries-get): GET /libraries - Retrieve a list of external libraries.
+- [Create a library](/api.html#operation-libraries-post): POST /libraries - Create a new external library.
+- [Retrieve a library](/api.html#operation-libraries-id-get): GET /libraries/{id} - Retrieve an external library by its ID.
+- [Update a library](/api.html#operation-libraries-id-put): PUT /libraries/{id} - Update an existing external library.
+- [Delete a library](/api.html#operation-libraries-id-delete): DELETE /libraries/{id} - Delete an external library by its ID.
+- [Scan a library](/api.html#operation-libraries-id-scan-post): POST /libraries/{id}/scan - Queue a scan for the external library to find and import new assets.
+- [Retrieve library statistics](/api.html#operation-libraries-id-statistics-get): GET /libraries/{id}/statistics - Retrieve statistics for a specific external library, including number of videos, images, and storage usage.
+- [Validate library settings](/api.html#operation-libraries-id-validate-post): POST /libraries/{id}/validate - Validate the settings of an external library.
+- [Retrieve map markers](/api.html#operation-map-markers-get): GET /map/markers - Retrieve a list of latitude and longitude coordinates for every asset with location data.
+- [Reverse geocode coordinates](/api.html#operation-map-reverse-geocode-get): GET /map/reverse-geocode - Retrieve location information (e.g., city, country) for given latitude and longitude coordinates.
+- [Retrieve memories](/api.html#operation-memories-get): GET /memories - Retrieve a list of memories. Memories are sorted descending by creation date by default, although they can also be sorted in ascending order, or randomly.
+- [Create a memory](/api.html#operation-memories-post): POST /memories - Create a new memory by providing a name, description, and a list of asset IDs to include in the memory.
+- [Retrieve memories statistics](/api.html#operation-memories-statistics-get): GET /memories/statistics - Retrieve statistics about memories, such as total count and other relevant metrics.
+- [Retrieve a memory](/api.html#operation-memories-id-get): GET /memories/{id} - Retrieve a specific memory by its ID.
+- [Update a memory](/api.html#operation-memories-id-put): PUT /memories/{id} - Update an existing memory by its ID.
+- [Delete a memory](/api.html#operation-memories-id-delete): DELETE /memories/{id} - Delete a specific memory by its ID.
+- [Add assets to a memory](/api.html#operation-memories-id-assets-put): PUT /memories/{id}/assets - Add a list of asset IDs to a specific memory.
+- [Remove assets from a memory](/api.html#operation-memories-id-assets-delete): DELETE /memories/{id}/assets - Remove a list of asset IDs from a specific memory.
+- [Retrieve notifications](/api.html#operation-notifications-get): GET /notifications - Retrieve a list of notifications.
+- [Update notifications](/api.html#operation-notifications-put): PUT /notifications - Update a list of notifications. Allows to bulk-set the read status of notifications.
+- [Delete notifications](/api.html#operation-notifications-delete): DELETE /notifications - Delete a list of notifications at once.
+- [Get a notification](/api.html#operation-notifications-id-get): GET /notifications/{id} - Retrieve a specific notification identified by id.
+- [Update a notification](/api.html#operation-notifications-id-put): PUT /notifications/{id} - Update a specific notification to set its read status.
+- [Delete a notification](/api.html#operation-notifications-id-delete): DELETE /notifications/{id} - Delete a specific notification.
+- [Start OAuth](/api.html#operation-oauth-authorize-post): POST /oauth/authorize - Initiate the OAuth authorization process.
+- [Backchannel OAuth logout](/api.html#operation-oauth-backchannel-logout-post): POST /oauth/backchannel-logout - Logout the OAuth account and invalidate the session specified by the sid claim or all sessions if the sid claim is not present.
+- [Finish OAuth](/api.html#operation-oauth-callback-post): POST /oauth/callback - Complete the OAuth authorization process by exchanging the authorization code for a session token.
+- [Link OAuth account](/api.html#operation-oauth-link-post): POST /oauth/link - Link an OAuth account to the authenticated user.
+- [Redirect OAuth to mobile](/api.html#operation-oauth-mobile-redirect-get): GET /oauth/mobile-redirect - Requests to this URL are automatically forwarded to the mobile app, and is used in some cases for OAuth redirecting.
+- [Unlink OAuth account](/api.html#operation-oauth-unlink-post): POST /oauth/unlink - Unlink the OAuth account from the authenticated user.
+- [Retrieve partners](/api.html#operation-partners-get): GET /partners - Retrieve a list of partners with whom assets are shared.
+- [Create a partner](/api.html#operation-partners-post): POST /partners - Create a new partner to share assets with.
+- [Create a partner](/api.html#operation-partners-id-post): POST /partners/{id} - Create a new partner to share assets with.
+- [Update a partner](/api.html#operation-partners-id-put): PUT /partners/{id} - Specify whether a partner's assets should appear in the user's timeline.
+- [Remove a partner](/api.html#operation-partners-id-delete): DELETE /partners/{id} - Stop sharing assets with a partner.
+- [Get all people](/api.html#operation-people-get): GET /people - Retrieve a list of all people.
+- [Create a person](/api.html#operation-people-post): POST /people - Create a new person that can have multiple faces assigned to them.
+- [Update people](/api.html#operation-people-put): PUT /people - Bulk update multiple people at once.
+- [Delete people](/api.html#operation-people-delete): DELETE /people - Bulk delete a list of people at once.
+- [Get a person](/api.html#operation-people-id-get): GET /people/{id} - Retrieve a person by id.
+- [Update person](/api.html#operation-people-id-put): PUT /people/{id} - Update an individual person.
+- [Delete person](/api.html#operation-people-id-delete): DELETE /people/{id} - Delete an individual person.
+- [Merge people](/api.html#operation-people-id-merge-post): POST /people/{id}/merge - Merge a list of people into the person specified in the path parameter.
+- [Reassign faces](/api.html#operation-people-id-reassign-put): PUT /people/{id}/reassign - Bulk reassign a list of faces to a different person.
+- [Get person statistics](/api.html#operation-people-id-statistics-get): GET /people/{id}/statistics - Retrieve statistics about a specific person.
+- [Get person thumbnail](/api.html#operation-people-id-thumbnail-get): GET /people/{id}/thumbnail - Retrieve the thumbnail file for a person.
+- [List all plugins](/api.html#operation-plugins-get): GET /plugins - Retrieve a list of plugins available to the authenticated user.
+- [Retrieve plugin methods](/api.html#operation-plugins-methods-get): GET /plugins/methods - Retrieve a list of plugin methods
+- [Retrieve workflow templates](/api.html#operation-plugins-templates-get): GET /plugins/templates - Retrieve workflow templates provided by installed plugins
+- [Retrieve a plugin](/api.html#operation-plugins-id-get): GET /plugins/{id} - Retrieve information about a specific plugin by its ID.
+- [List all queues](/api.html#operation-queues-get): GET /queues - Retrieves a list of queues.
+- [Retrieve a queue](/api.html#operation-queues-name-get): GET /queues/{name} - Retrieves a specific queue by its name.
+- [Update a queue](/api.html#operation-queues-name-put): PUT /queues/{name} - Change the paused status of a specific queue.
+- [Retrieve queue jobs](/api.html#operation-queues-name-jobs-get): GET /queues/{name}/jobs - Retrieves a list of queue jobs from the specified queue.
+- [Empty a queue](/api.html#operation-queues-name-jobs-delete): DELETE /queues/{name}/jobs - Removes all jobs from the specified queue.
+- [Retrieve assets by city](/api.html#operation-search-cities-get): GET /search/cities - Retrieve a list of assets with each asset belonging to a different city. This endpoint is used on the places pages to show a single thumbnail for each city the user has assets in.
+- [Retrieve explore data](/api.html#operation-search-explore-get): GET /search/explore - Retrieve data for the explore section, such as popular people and places.
+- [Search large assets](/api.html#operation-search-large-assets-post): POST /search/large-assets - Search for assets that are considered large based on specified criteria.
+- [Search assets by metadata](/api.html#operation-search-metadata-post): POST /search/metadata - Search for assets based on various metadata criteria.
+- [Search people](/api.html#operation-search-person-get): GET /search/person - Search for people by name.
+- [Search places](/api.html#operation-search-places-get): GET /search/places - Search for places by name.
+- [Search random assets](/api.html#operation-search-random-post): POST /search/random - Retrieve a random selection of assets based on the provided criteria.
+- [Smart asset search](/api.html#operation-search-smart-post): POST /search/smart - Perform a smart search for assets by using machine learning vectors to determine relevance.
+- [Search asset statistics](/api.html#operation-search-statistics-post): POST /search/statistics - Retrieve statistical data about assets based on search criteria, such as the total matching count.
+- [Retrieve search suggestions](/api.html#operation-search-suggestions-get): GET /search/suggestions - Retrieve search suggestions based on partial input. This endpoint is used for typeahead search features.
+- [Get server information](/api.html#operation-server-about-get): GET /server/about - Retrieve a list of information about the server.
+- [Get APK links](/api.html#operation-server-apk-links-get): GET /server/apk-links - Retrieve links to the APKs for the current server version.
+- [Get config](/api.html#operation-server-config-get): GET /server/config - Retrieve the current server configuration.
+- [Get features](/api.html#operation-server-features-get): GET /server/features - Retrieve available features supported by this server.
+- [Get product key](/api.html#operation-server-license-get): GET /server/license - Retrieve information about whether the server currently has a product key registered.
+- [Set server product key](/api.html#operation-server-license-put): PUT /server/license - Validate and set the server product key if successful.
+- [Delete server product key](/api.html#operation-server-license-delete): DELETE /server/license - Delete the currently set server product key.
+- [Get supported media types](/api.html#operation-server-media-types-get): GET /server/media-types - Retrieve all media types supported by the server.
+- [Ping](/api.html#operation-server-ping-get): GET /server/ping - Pong
+- [Get statistics](/api.html#operation-server-statistics-get): GET /server/statistics - Retrieve statistics about the entire Immich instance such as asset counts.
+- [Get storage](/api.html#operation-server-storage-get): GET /server/storage - Retrieve the current storage utilization information of the server.
+- [Get server version](/api.html#operation-server-version-get): GET /server/version - Retrieve the current server version in semantic versioning (semver) format.
+- [Get version check status](/api.html#operation-server-version-check-get): GET /server/version-check - Retrieve information about the last time the version check ran.
+- [Get version history](/api.html#operation-server-version-history-get): GET /server/version-history - Retrieve a list of past versions the server has been on.
+- [Retrieve sessions](/api.html#operation-sessions-get): GET /sessions - Retrieve a list of sessions for the user.
+- [Create a session](/api.html#operation-sessions-post): POST /sessions - Create a session as a child to the current session. This endpoint is used for casting.
+- [Delete all sessions](/api.html#operation-sessions-delete): DELETE /sessions - Delete all sessions for the user. This will not delete the current session.
+- [Update a session](/api.html#operation-sessions-id-put): PUT /sessions/{id} - Update a specific session identified by id.
+- [Delete a session](/api.html#operation-sessions-id-delete): DELETE /sessions/{id} - Delete a specific session by id.
+- [Lock a session](/api.html#operation-sessions-id-lock-post): POST /sessions/{id}/lock - Lock a specific session by id.
+- [Retrieve all shared links](/api.html#operation-shared-links-get): GET /shared-links - Retrieve a list of all shared links.
+- [Create a shared link](/api.html#operation-shared-links-post): POST /shared-links - Create a new shared link.
+- [Shared link login](/api.html#operation-shared-links-login-post): POST /shared-links/login - Login to a password protected shared link
+- [Retrieve current shared link](/api.html#operation-shared-links-me-get): GET /shared-links/me - Retrieve the current shared link associated with authentication method.
+- [Retrieve a shared link](/api.html#operation-shared-links-id-get): GET /shared-links/{id} - Retrieve a specific shared link by its ID.
+- [Delete a shared link](/api.html#operation-shared-links-id-delete): DELETE /shared-links/{id} - Delete a specific shared link by its ID.
+- [Update a shared link](/api.html#operation-shared-links-id-patch): PATCH /shared-links/{id} - Update an existing shared link by its ID.
+- [Add assets to a shared link](/api.html#operation-shared-links-id-assets-put): PUT /shared-links/{id}/assets - Add assets to a specific shared link by its ID. This endpoint is only relevant for shared link of type individual.
+- [Remove assets from a shared link](/api.html#operation-shared-links-id-assets-delete): DELETE /shared-links/{id}/assets - Remove assets from a specific shared link by its ID. This endpoint is only relevant for shared link of type individual.
+- [Retrieve stacks](/api.html#operation-stacks-get): GET /stacks - Retrieve a list of stacks.
+- [Create a stack](/api.html#operation-stacks-post): POST /stacks - Create a new stack by providing a name and a list of asset IDs to include in the stack. If any of the provided asset IDs are primary assets of an existing stack, the existing stack will be merged into the newly created stack.
+- [Delete stacks](/api.html#operation-stacks-delete): DELETE /stacks - Delete multiple stacks by providing a list of stack IDs.
+- [Retrieve a stack](/api.html#operation-stacks-id-get): GET /stacks/{id} - Retrieve a specific stack by its ID.
+- [Update a stack](/api.html#operation-stacks-id-put): PUT /stacks/{id} - Update an existing stack by its ID.
+- [Delete a stack](/api.html#operation-stacks-id-delete): DELETE /stacks/{id} - Delete a specific stack by its ID.
+- [Remove an asset from a stack](/api.html#operation-stacks-id-assets-assetid-delete): DELETE /stacks/{id}/assets/{assetId} - Remove a specific asset from a stack by providing the stack ID and asset ID.
+- [Retrieve acknowledgements](/api.html#operation-sync-ack-get): GET /sync/ack - Retrieve the synchronization acknowledgments for the current session.
+- [Acknowledge changes](/api.html#operation-sync-ack-post): POST /sync/ack - Send a list of synchronization acknowledgements to confirm that the latest changes have been received.
+- [Delete acknowledgements](/api.html#operation-sync-ack-delete): DELETE /sync/ack - Delete specific synchronization acknowledgments.
+- [Stream sync changes](/api.html#operation-sync-stream-post): POST /sync/stream - Retrieve a JSON lines streamed response of changes for synchronization. This endpoint is used by the mobile app to efficiently stay up to date with changes.
+- [Get system configuration](/api.html#operation-system-config-get): GET /system-config - Retrieve the current system configuration.
+- [Update system configuration](/api.html#operation-system-config-put): PUT /system-config - Update the system configuration with a new system configuration.
+- [Get system configuration defaults](/api.html#operation-system-config-defaults-get): GET /system-config/defaults - Retrieve the default values for the system configuration.
+- [Get storage template options](/api.html#operation-system-config-storage-template-options-get): GET /system-config/storage-template-options - Retrieve exemplary storage template options.
+- [Retrieve admin onboarding](/api.html#operation-system-metadata-admin-onboarding-get): GET /system-metadata/admin-onboarding - Retrieve the current admin onboarding status.
+- [Update admin onboarding](/api.html#operation-system-metadata-admin-onboarding-post): POST /system-metadata/admin-onboarding - Update the admin onboarding status.
+- [Retrieve reverse geocoding state](/api.html#operation-system-metadata-reverse-geocoding-state-get): GET /system-metadata/reverse-geocoding-state - Retrieve the current state of the reverse geocoding import.
+- [Retrieve version check state](/api.html#operation-system-metadata-version-check-state-get): GET /system-metadata/version-check-state - Retrieve the current state of the version check process.
+- [Retrieve tags](/api.html#operation-tags-get): GET /tags - Retrieve a list of all tags.
+- [Create a tag](/api.html#operation-tags-post): POST /tags - Create a new tag by providing a name and optional color.
+- [Upsert tags](/api.html#operation-tags-put): PUT /tags - Create or update multiple tags in a single request.
+- [Tag assets](/api.html#operation-tags-assets-put): PUT /tags/assets - Add multiple tags to multiple assets in a single request.
+- [Retrieve a tag](/api.html#operation-tags-id-get): GET /tags/{id} - Retrieve a specific tag by its ID.
+- [Update a tag](/api.html#operation-tags-id-put): PUT /tags/{id} - Update an existing tag identified by its ID.
+- [Delete a tag](/api.html#operation-tags-id-delete): DELETE /tags/{id} - Delete a specific tag by its ID.
+- [Tag assets](/api.html#operation-tags-id-assets-put): PUT /tags/{id}/assets - Add a tag to all the specified assets.
+- [Untag assets](/api.html#operation-tags-id-assets-delete): DELETE /tags/{id}/assets - Remove a tag from all the specified assets.
+- [Get time bucket](/api.html#operation-timeline-bucket-get): GET /timeline/bucket - Retrieve a string of all asset ids in a given time bucket.
+- [Get time buckets](/api.html#operation-timeline-buckets-get): GET /timeline/buckets - Retrieve a list of all minimal time buckets.
+- [Empty trash](/api.html#operation-trash-empty-post): POST /trash/empty - Permanently delete all items in the trash.
+- [Restore trash](/api.html#operation-trash-restore-post): POST /trash/restore - Restore all items in the trash.
+- [Restore assets](/api.html#operation-trash-restore-assets-post): POST /trash/restore/assets - Restore specific assets from the trash.
+- [Get all users](/api.html#operation-users-get): GET /users - Retrieve a list of all users on the server.
+- [Get current user](/api.html#operation-users-me-get): GET /users/me - Retrieve information about the user making the API request.
+- [Update current user](/api.html#operation-users-me-put): PUT /users/me - Update the current user making the API request.
+- [Retrieve calendar heatmap activity](/api.html#operation-users-me-calendar-heatmap-get): GET /users/me/calendar-heatmap - Retrieve activity counts for a specified period, in a calendar heatmap format.
+- [Retrieve user product key](/api.html#operation-users-me-license-get): GET /users/me/license - Retrieve information about whether the current user has a registered product key.
+- [Set user product key](/api.html#operation-users-me-license-put): PUT /users/me/license - Register a product key for the current user.
+- [Delete user product key](/api.html#operation-users-me-license-delete): DELETE /users/me/license - Delete the registered product key for the current user.
+- [Retrieve user onboarding](/api.html#operation-users-me-onboarding-get): GET /users/me/onboarding - Retrieve the onboarding status of the current user.
+- [Update user onboarding](/api.html#operation-users-me-onboarding-put): PUT /users/me/onboarding - Update the onboarding status of the current user.
+- [Delete user onboarding](/api.html#operation-users-me-onboarding-delete): DELETE /users/me/onboarding - Delete the onboarding status of the current user.
+- [Get my preferences](/api.html#operation-users-me-preferences-get): GET /users/me/preferences - Retrieve the preferences for the current user.
+- [Update my preferences](/api.html#operation-users-me-preferences-put): PUT /users/me/preferences - Update the preferences of the current user.
+- [Create user profile image](/api.html#operation-users-profile-image-post): POST /users/profile-image - Upload and set a new profile image for the current user.
+- [Delete user profile image](/api.html#operation-users-profile-image-delete): DELETE /users/profile-image - Delete the profile image of the current user.
+- [Retrieve a user](/api.html#operation-users-id-get): GET /users/{id} - Retrieve a specific user by their ID.
+- [Retrieve user profile image](/api.html#operation-users-id-profile-image-get): GET /users/{id}/profile-image - Retrieve the profile image file for a user.
+- [Retrieve assets by original path](/api.html#operation-view-folder-get): GET /view/folder - Retrieve assets that are children of a specific folder.
+- [Retrieve unique paths](/api.html#operation-view-folder-unique-paths-get): GET /view/folder/unique-paths - Retrieve a list of unique folder paths from asset original paths.
+- [List all workflows](/api.html#operation-workflows-get): GET /workflows - Retrieve a list of workflows available to the authenticated user.
+- [Create a workflow](/api.html#operation-workflows-post): POST /workflows - Create a new workflow, the workflow can also be created with empty filters and actions.
+- [List all workflow triggers](/api.html#operation-workflows-triggers-get): GET /workflows/triggers - Retrieve a list of all available workflow triggers.
+- [Retrieve a workflow](/api.html#operation-workflows-id-get): GET /workflows/{id} - Retrieve information about a specific workflow by its ID.
+- [Update a workflow](/api.html#operation-workflows-id-put): PUT /workflows/{id} - Update the information of a specific workflow by its ID. This endpoint can be used to update the workflow name, description, trigger type, filters and actions order, etc.
+- [Delete a workflow](/api.html#operation-workflows-id-delete): DELETE /workflows/{id} - Delete a workflow by its ID.
+- [Retrieve a workflow](/api.html#operation-workflows-id-share-get): GET /workflows/{id}/share - Retrieve a workflow details without ids, default values, etc.

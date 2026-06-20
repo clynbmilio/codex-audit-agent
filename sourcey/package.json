@@ -1,0 +1,13 @@
+{
+  "name": "immich-sourcey-reference",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "sourcey validate immich-openapi-specs.json",
+    "build": "sourcey build --config sourcey.config.ts --output ../public && node build-evidence.mjs ../public"
+  },
+  "devDependencies": {
+    "sourcey": "3.6.3"
+  }
+}
